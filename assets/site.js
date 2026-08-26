@@ -113,6 +113,21 @@
     items.forEach(item => observer.observe(item));
   }
 
+  function initTitleReveal() {
+    const titles = document.querySelectorAll("main h1, main h2");
+    if (!titles.length) return;
+    titles.forEach(title => title.classList.add("title-reveal"));
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced || !("IntersectionObserver" in window)) return titles.forEach(title => title.classList.add("is-title-visible"));
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-title-visible");
+        observer.unobserve(entry.target);
+      }
+    }), { threshold: 0.2, rootMargin: "0px 0px -6% 0px" });
+    requestAnimationFrame(() => requestAnimationFrame(() => titles.forEach(title => observer.observe(title))));
+  }
+
   function initFaq() {
     document.querySelectorAll("details").forEach(detail => detail.addEventListener("toggle", () => {
       if (!detail.open) return;
@@ -126,5 +141,6 @@
   renderServiceDetail();
   renderWorkArtifacts();
   initFaq();
+  initTitleReveal();
   initReveal();
 })();
