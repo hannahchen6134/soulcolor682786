@@ -135,11 +135,116 @@
     }));
   }
 
+  function initSpectrumBlend() {
+    const fields = document.querySelectorAll(".page-spectrum-field");
+    if (!fields.length) return;
+
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const colors = [
+      { rgb: [205, 104, 145], x: .00, y: .24, radius: .66, delay: 0, period: 19, dx: .020, dy: .018 },
+      { rgb: [222, 151, 92], x: .22, y: .78, radius: .59, delay: 520, period: 23, dx: -.018, dy: .015 },
+      { rgb: [207, 181, 75], x: .42, y: .30, radius: .55, delay: 1040, period: 21, dx: .015, dy: -.018 },
+      { rgb: [105, 166, 143], x: .68, y: .68, radius: .62, delay: 1560, period: 24, dx: -.020, dy: -.014 },
+      { rgb: [100, 139, 184], x: .96, y: .28, radius: .65, delay: 2080, period: 22, dx: -.018, dy: .018 },
+      { rgb: [151, 127, 170], x: .82, y: .88, radius: .52, delay: 2600, period: 25, dx: .015, dy: -.016 }
+    ];
+
+    const easeInOut = value => value * value * (3 - 2 * value);
+
+    fields.forEach((field, fieldIndex) => {
+      const canvas = document.createElement("canvas");
+      canvas.className = "spectrum-canvas";
+      canvas.setAttribute("aria-hidden", "true");
+      field.prepend(canvas);
+      field.classList.add("has-spectrum-canvas");
+
+      const context = canvas.getContext("2d", { alpha: true });
+      if (!context) return;
+      let width = 0;
+      let height = 0;
+      let pixelRatio = 1;
+      let start = performance.now();
+      let frameId = 0;
+
+      function resize() {
+        const rect = field.getBoundingClientRect();
+        width = Math.max(1, Math.round(rect.width));
+        height = Math.max(1, Math.round(rect.height));
+        pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(width * pixelRatio);
+        canvas.height = Math.round(height * pixelRatio);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      }
+
+      function draw(now, finalState) {
+        if (!width || !height) resize();
+        const elapsed = finalState ? 10000 : now - start;
+        context.clearRect(0, 0, width, height);
+        context.globalCompositeOperation = "source-over";
+
+        colors.forEach((color, index) => {
+          const arrival = finalState ? 1 : easeInOut(Math.min(1, Math.max(0, (elapsed - color.delay) / 2100)));
+          if (arrival <= 0) return;
+          const phase = (now / 1000 / color.period) * Math.PI * 2 + index * .84 + fieldIndex * .45;
+          const x = width * (color.x + Math.sin(phase) * color.dx);
+          const y = height * (color.y + Math.cos(phase * .86) * color.dy);
+          const breathe = 1 + Math.sin(phase * .72) * .028;
+          const radius = Math.max(width, height) * color.radius * breathe;
+          const [r, g, b] = color.rgb;
+          const strength = .40 * arrival;
+          const gradient = context.createRadialGradient(x, y, 0, x, y, radius);
+          gradient.addColorStop(0, `rgba(${r},${g},${b},${strength})`);
+          gradient.addColorStop(.24, `rgba(${r},${g},${b},${strength * .82})`);
+          gradient.addColorStop(.5, `rgba(${r},${g},${b},${strength * .44})`);
+          gradient.addColorStop(.74, `rgba(${r},${g},${b},${strength * .16})`);
+          gradient.addColorStop(1, `rgba(${r},${g},${b},0)`);
+          context.fillStyle = gradient;
+          context.fillRect(0, 0, width, height);
+        });
+
+        const allIn = finalState ? 1 : Math.min(1, Math.max(0, (elapsed - 2500) / 2100));
+        if (allIn > 0) {
+          const breath = .5 + .5 * Math.sin(now * .00042 + fieldIndex);
+          const warmGlow = context.createRadialGradient(width * .5, height * .45, 0, width * .5, height * .45, Math.min(width, height) * .56);
+          warmGlow.addColorStop(0, `rgba(255,246,232,${(.035 + breath * .025) * allIn})`);
+          warmGlow.addColorStop(1, "rgba(255,246,232,0)");
+          context.fillStyle = warmGlow;
+          context.fillRect(0, 0, width, height);
+        }
+
+        if (!finalState) frameId = requestAnimationFrame(time => draw(time, false));
+      }
+
+      resize();
+      if (reduced) draw(performance.now(), true);
+      else frameId = requestAnimationFrame(time => draw(time, false));
+
+      if ("ResizeObserver" in window) {
+        const resizeObserver = new ResizeObserver(() => resize());
+        resizeObserver.observe(field);
+      } else {
+        window.addEventListener("resize", resize, { passive: true });
+      }
+
+      document.addEventListener("visibilitychange", () => {
+        if (reduced) return;
+        if (document.hidden) cancelAnimationFrame(frameId);
+        else {
+          start = performance.now() - 10000;
+          frameId = requestAnimationFrame(time => draw(time, false));
+        }
+      });
+    });
+  }
+
   initShell();
   initMenu();
   renderServicesOverview();
   renderServiceDetail();
   renderWorkArtifacts();
+  initSpectrumBlend();
   initFaq();
   initTitleReveal();
   initReveal();
