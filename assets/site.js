@@ -29,13 +29,26 @@
     </div>`;
   }
 
+  function overviewPriceMarkup(service) {
+    const price = service.prices;
+    if (!price) return "";
+    return `<div class="overview-pricing" aria-label="${service.title}體驗價格"><p class="overview-price-main"><span>體驗價</span><strong>NT$ ${price.trial}</strong><small>${price.trialNote}</small></p></div>`;
+  }
+
+  function deliverablesMarkup(items) {
+    return items.map(item => {
+      const [title, note] = item.split("｜");
+      return `<li>${note ? `<strong>${title}</strong><small>${note}</small>` : title}</li>`;
+    }).join("");
+  }
+
   function initShell() {
     const header = document.querySelector("[data-site-header]");
     if (header) {
       header.innerHTML = `<a class="brand" href="index.html" aria-label="Soul Color 首頁"><span>SOUL COLOR</span><small>PERSON PALETTE</small></a><nav class="desktop-nav" aria-label="主要導覽">${navItems.map(([key,label,href]) => `<a ${page === key ? 'aria-current="page"' : ""} href="${href}">${label}</a>`).join("")}</nav><a class="nav-order order-link" href="#">立即預約</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span><b class="sr-only">開啟選單</b></button><div class="mobile-menu" id="mobileMenu" hidden>${navItems.map(([key,label,href]) => `<a ${page === key ? 'aria-current="page"' : ""} href="${href}">${label}</a>`).join("")}<a class="button button--primary order-link" href="#">立即預約</a></div>`;
     }
     const footer = document.querySelector("[data-site-footer]");
-    if (footer) footer.innerHTML = `<div class="footer-brand"><span>SOUL COLOR</span><p>用色彩與對談，看見不同角度的你。</p></div><nav aria-label="頁尾導覽"><a href="about.html">關於人物調色盤</a><a href="profile.html">關於我</a><a href="services.html">服務方案</a><a href="faq.html">FAQ</a></nav><small>© ${new Date().getFullYear()} Soul Color</small>`;
+    if (footer) footer.innerHTML = `<div class="footer-brand"><span>SOUL COLOR</span></div><nav aria-label="頁尾導覽"><a href="about.html">人物調色盤</a><a href="profile.html">關於我</a><a href="services.html">服務方案</a><a href="faq.html">FAQ</a></nav><small>© ${new Date().getFullYear()} Soul Color</small>`;
     document.querySelectorAll(".order-link").forEach(link => {
       link.href = config.orderURL;
       link.target = "_blank";
@@ -61,8 +74,8 @@
     if (!root) return;
     root.innerHTML = Object.entries(config.services).map(([slug, service], index) => `
       <article class="service-row service-row--${slug} ${index % 2 ? "service-row--reverse" : ""} reveal" id="service-${slug}">
-        <div class="service-copy"><div class="service-heading"><span class="section-number">${service.number}</span><p class="eyebrow">PERSON PALETTE SERVICE</p></div><h2><a href="service-${slug}.html">${service.title}<span aria-hidden="true">↗</span></a></h2><p class="service-tier">${service.tier}</p><p class="service-positioning">${service.positioning}</p>${priceMarkup(service)}<p class="service-duration">${service.duration}</p><div class="service-includes"><h3>方案包含</h3><ul>${service.deliverables.map(item => `<li>${item}</li>`).join("")}</ul></div></div>
-        <a class="service-visual" href="service-${slug}.html" aria-label="查看${service.title}成品範例與方案詳情"><span class="sample-label">SAMPLE · ${service.number}</span>${mockupMarkup(service.mockup, service.title)}</a>
+        <div class="service-copy"><div class="service-heading"><span class="section-number">${service.number}</span></div><h2><a href="service-${slug}.html">${service.title}<span aria-hidden="true">↗</span></a></h2><p class="service-positioning">${service.positioning}</p>${overviewPriceMarkup(service)}<p class="service-duration">${service.duration}</p><details class="service-more"><summary>查看價格與方案內容</summary><div class="service-more-panel"><dl class="service-alt-prices"><div><dt>原價</dt><dd>NT$ ${service.prices.original}</dd></div><div><dt>早鳥價</dt><dd>NT$ ${service.prices.early}<small>${service.prices.earlyNote}</small></dd></div></dl><div class="service-includes"><h3>你會收到</h3><ul>${deliverablesMarkup(service.deliverables)}</ul></div></div></details></div>
+        <a class="service-visual" href="service-${slug}.html" aria-label="查看${service.title}作品與方案詳情">${mockupMarkup(service.mockup, service.title)}</a>
       </article>`).join("");
   }
 
@@ -74,7 +87,7 @@
     root.innerHTML = `
       <section class="detail-hero page-hero"><div class="page-light-field" aria-hidden="true"></div><div class="detail-hero-copy"><p class="eyebrow">SERVICE ${service.number}</p><h1>${service.title}</h1><p class="lead">${service.positioning}</p>${priceMarkup(service)}<p class="service-duration">${service.duration}</p><p class="service-logistics"><span>線上訪談</span><span>訪談後約 5 天內交付電子檔</span><span>成品最多可修改兩次哦</span></p><a class="button button--primary order-link" href="${config.orderURL}" target="_blank" rel="noopener noreferrer">預約${service.title}</a></div><div class="detail-hero-visual">${mockupMarkup(service.mockup, service.title)}</div></section>
       <section class="detail-fit section-pad reveal"><div><p class="eyebrow">FOR YOU</p><h2>這個方案<br>適合現在的你嗎？</h2></div><ul>${service.fit.map(item => `<li>${item}</li>`).join("")}</ul></section>
-      <section class="detail-deliver section-pad reveal"><div class="deliver-copy"><p class="eyebrow">YOU WILL RECEIVE</p><h2>你會得到</h2><ul>${service.deliverables.map(item => `<li>${item}</li>`).join("")}</ul><p class="note">色彩不是人格答案。成品記錄的是這一次相遇裡，我們一起看見的角度。</p><a class="text-link detail-faq-link" href="faq.html">有其他問題？前往 FAQ <span>↗</span></a></div><div>${mockupMarkup(service.mockup, service.title)}</div></section>
+      <section class="detail-deliver section-pad reveal"><div class="deliver-copy"><p class="eyebrow">YOU WILL RECEIVE</p><h2>你會得到</h2><ul>${deliverablesMarkup(service.deliverables)}</ul><p class="note">色彩不是人格答案。成品記錄的是這一次相遇裡，我們一起看見的角度。</p><a class="text-link detail-faq-link" href="faq.html">有其他問題？前往 FAQ <span>↗</span></a></div><div>${mockupMarkup(service.mockup, service.title)}</div></section>
       <section class="closing-cta closing-cta--light reveal"><p><span>這個方案符合你想留下的方式嗎？</span><span>預約後，我們會一起確認訪談時間。</span></p><a class="button button--primary order-link" href="${config.orderURL}" target="_blank" rel="noopener noreferrer">預約${service.title}</a></section>`;
   }
 
