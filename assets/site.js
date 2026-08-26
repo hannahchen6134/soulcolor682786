@@ -136,7 +136,7 @@
   }
 
   function initSpectrumBlend() {
-    const fields = document.querySelectorAll(".page-spectrum-field");
+    const fields = document.querySelectorAll(".page-spectrum-field, .home-hero .light-field");
     if (!fields.length) return;
 
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -152,6 +152,7 @@
     const easeInOut = value => value * value * (3 - 2 * value);
 
     fields.forEach((field, fieldIndex) => {
+      const isHomeField = field.matches(".home-hero .light-field");
       const canvas = document.createElement("canvas");
       canvas.className = "spectrum-canvas";
       canvas.setAttribute("aria-hidden", "true");
@@ -193,7 +194,7 @@
           const breathe = 1 + Math.sin(phase * .72) * .028;
           const radius = Math.max(width, height) * color.radius * breathe;
           const [r, g, b] = color.rgb;
-          const strength = .40 * arrival;
+          const strength = (isHomeField ? .46 : .40) * arrival;
           const gradient = context.createRadialGradient(x, y, 0, x, y, radius);
           gradient.addColorStop(0, `rgba(${r},${g},${b},${strength})`);
           gradient.addColorStop(.24, `rgba(${r},${g},${b},${strength * .82})`);
