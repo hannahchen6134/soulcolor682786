@@ -637,7 +637,9 @@ h3 { font-size: clamp(24px, 2vw, 32px); line-height: 1.42; }
   .client-voices-grid blockquote p { font-size: 13px; line-height: 1.65; }
   .home-close, .closing-cta { min-height: 220px; padding-top: 42px; padding-bottom: 42px; }
   .home-close h2, .closing-cta > p, .closing-cta > div > p { font-size: 18px; line-height: 1.45; }
-  .page-hero { min-height: 290px; padding-top: 50px; padding-bottom: 50px; }
+  .page-hero { min-height: 290px; padding-top: 50px; padding-bottom: 50px; place-items: center start; text-align: left; }
+  .page-hero-copy { width: 100%; }
+  .page-hero .lead { margin-inline: 0; }
   .page-hero h1 { font-size: 22px; line-height: 1.3; }
   .about-question, .about-not-test, .brand-story { grid-template-columns: 1fr; gap: 42px; }
   .about-takeaways { grid-template-columns: 1fr; gap: 40px; }
