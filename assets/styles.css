@@ -265,9 +265,10 @@ h3 { font-size: clamp(24px, 2vw, 32px); line-height: 1.42; }
 .question-paper p { position: relative; z-index: 1; font-size: clamp(17px,1.5vw,21px); color: var(--wine); }
 .paper-glow { position: absolute; width: 280px; height: 280px; right: -80px; bottom: -90px; border-radius: 50%; background: radial-gradient(circle,rgba(255,250,239,.76),rgba(222,201,180,.16) 42%,transparent 74%); filter: blur(18px); }
 .brand-story { position: relative; background: linear-gradient(180deg,#f4e9df 0%,#f9f3ec 22%,var(--paper-light) 70%,#f6eee6 100%); }
-.story-index { position: sticky; top: 120px; }
+.story-index { position: static; }
 .story-index > span { display: block; font: italic 400 68px/1 var(--latin); color: rgba(166,110,96,.32); }
 .story-note { max-width: 280px; margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.brand-story .story-note { max-width: 640px; margin: 0 0 22px; padding: 0; border: 0; }
 .about-takeaways { display: grid; grid-template-columns: minmax(250px,.68fr) minmax(0,1.32fr); gap: clamp(54px,8vw,120px); align-items: start; background: linear-gradient(160deg,#faf5ee 0%,#f4e8de 52%,#f8f1e9 100%); }
 .about-takeaways-head { position: sticky; top: 120px; }
 .about-takeaways-head h2 { margin-top: 15px; color: var(--wine); text-wrap: balance; }
