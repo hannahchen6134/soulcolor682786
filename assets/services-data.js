@@ -1,5 +1,5 @@
 window.SOUL_COLOR_CONFIG = {
-  orderURL: "https://docs.google.com/forms/d/1WEGpHhGCiGt85W7lfdjbMrhwdio8RGH1eNDigwXzUyg/viewform?chromeless=1",
+  orderURL: "https://forms.gle/53qNKfxwEG535emo6",
   services: {
     "color-memory": {
       number: "01",
