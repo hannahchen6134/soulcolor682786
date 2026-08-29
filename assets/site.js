@@ -21,8 +21,8 @@
     const chips = paletteChips;
     const paper = `<article class="mock-paper"><span>SOUL COLOR · PERSON PALETTE</span><h3>${title}</h3><div class="mock-rule"></div><p>用色彩記下這一次相遇裡<br>看見的不同角度</p><div class="mock-chips">${chips}</div></article>`;
     const summarySheetContent = summarySheetMarkup();
-    if (type === "a4") return `<div class="product-stage product-stage--a4"><span class="a4-callout a4-callout--quote"><strong>你說出的金句</strong><svg viewBox="0 0 78 26" aria-hidden="true"><path d="M2 4 72 21"></path><path d="m66 16 7 5-9 2"></path></svg></span><img class="sample-work-image" src="assets/images/sample-color-memory-aiqi.png" alt="色彩留影 A4 色彩人物整理作品範例"><span class="a4-callout a4-callout--angle"><svg viewBox="0 0 78 26" aria-hidden="true"><path d="m76 4-70 17"></path><path d="m12 16-7 5 9 2"></path></svg><span><small>也會留下</small><strong>我看見你的角度</strong></span></span></div>`;
-    if (type === "single") return `<div class="product-stage product-stage--single" data-artwork-gallery="single" aria-label="色彩人物卡與色彩留影作品預覽"><article class="person-card-sample"><img src="assets/images/sample-person-card-tony.jpg" alt="色彩人物卡案例：Tony 的人物介紹與雙方選色" loading="lazy" decoding="async"></article><article class="personal-summary-preview" aria-label="第二件成品：色彩留影示意">${summarySheetContent}</article><span class="gallery-hint" aria-hidden="true">點擊貼文放大</span></div>`;
+    if (type === "a4") return `<div class="product-stage product-stage--a4"><span class="a4-callout a4-callout--quote"><strong>你說出的金句</strong><svg viewBox="0 0 78 26" aria-hidden="true"><path d="M2 21 72 4"></path><path d="m65 2 8 2-6 6"></path></svg></span><img class="sample-work-image" src="assets/images/sample-color-memory-aiqi.png" alt="色彩留影 A4 色彩人物整理作品範例"><span class="a4-callout a4-callout--angle"><svg viewBox="0 0 78 26" aria-hidden="true"><path d="m76 21-70-17"></path><path d="m13 2-8 2 6 6"></path></svg><span><small>也會留下</small><strong>我看見你的角度</strong></span></span></div>`;
+    if (type === "single") return `<div class="product-stage product-stage--single" data-artwork-gallery="single" aria-label="色彩人物卡與色彩留影作品預覽"><article class="person-card-sample"><img src="assets/images/sample-person-card-tony.jpg" alt="色彩人物卡案例：Tony 的人物介紹與雙方選色" loading="lazy" decoding="async"></article><article class="personal-summary-preview" aria-label="第二件成品：色彩留影示意">${summarySheetContent}</article></div>`;
     const storySlides = [
       ["slide-01.png", "人物介紹、人物照片與雙方選色"],
       ["slide-02.png", "從顏色的角度開始認識人物"],
@@ -88,8 +88,12 @@
   function renderServicesOverview() {
     const root = document.querySelector("[data-services-overview]");
     if (!root) return;
-    const overviewVisual = (slug, service) => slug === "person-story"
-      ? `<div class="service-visual service-visual--artwork" aria-label="${service.title}作品預覽">${mockupMarkup(service.mockup, service.title)}<a class="story-case-link" href="https://www.instagram.com/p/DcbF-NKE7SI/?igsi=MWFpaDB2b295OW96bQ==" target="_blank" rel="noopener noreferrer">更瞭解矮琦<span aria-hidden="true">↗</span></a></div>`
+    const caseLinks = {
+      "person-card": "https://www.instagram.com/p/DcOTkRmzOZH/?igsi=eWtncXRreW00d2Jv",
+      "person-story": "https://www.instagram.com/p/DcbF-NKE7SI/?igsi=MWFpaDB2b295OW96bQ=="
+    };
+    const overviewVisual = (slug, service) => caseLinks[slug]
+      ? `<div class="service-visual service-visual--artwork" aria-label="${service.title}作品預覽">${mockupMarkup(service.mockup, service.title)}<a class="story-case-link" href="${caseLinks[slug]}" target="_blank" rel="noopener noreferrer">查看詳細訪談<span aria-hidden="true">↗</span></a></div>`
       : `<a class="service-visual" href="service-${slug}.html" aria-label="查看${service.title}作品與方案詳情">${mockupMarkup(service.mockup, service.title)}</a>`;
     root.innerHTML = Object.entries(config.services).map(([slug, service], index) => `
       <article class="service-row service-row--${slug} ${index % 2 ? "service-row--reverse" : ""} reveal" id="service-${slug}">
