@@ -17,7 +17,17 @@
     const paper = `<article class="mock-paper"><span>SOUL COLOR · PERSON PALETTE</span><h3>${title}</h3><div class="mock-rule"></div><p>用色彩記下這一次相遇裡<br>看見的不同角度</p><div class="mock-chips">${chips}</div></article>`;
     if (type === "a4") return `<div class="product-stage product-stage--a4"><img class="sample-work-image" src="assets/images/sample-color-memory-aiqi.png" alt="色彩留影 A4 色彩人物整理作品範例"></div>`;
     if (type === "single") return `<div class="product-stage product-stage--single" aria-label="單張 IG 貼文與 A4 整理範例版位"><article class="ig-sheet"><span>人物調色盤</span><strong>你會怎麼<br>介紹自己？</strong><div class="mock-chips">${chips}</div></article>${paper}</div>`;
-    return `<div class="product-stage product-stage--carousel"><div class="story-deck" role="group" aria-label="色彩人物誌八張輪播貼文，以牌卡扇形展開"><article aria-label="第 1 張：人物調色盤"><span>01</span><strong>人物<br>調色盤</strong></article><article aria-label="第 2 張：從色彩開始"><span>02</span><strong>從色彩<br>開始</strong><div class="mock-chips">${chips}</div></article><article aria-label="第 3 張：你眼中的自己"><span>03</span><strong>你眼中的<br>自己</strong></article><article aria-label="第 4 張：我看見的你"><span>04</span><strong>我看見的<br>你</strong></article><article aria-label="第 5 張：故事慢慢展開"><span>05</span><strong>故事慢慢<br>展開</strong></article><article aria-label="第 6 張：另一個角度"><span>06</span><strong>另一個<br>角度</strong></article><article aria-label="第 7 張：色彩人物整理"><span>07</span><strong>色彩人物<br>整理</strong><div class="mock-chips">${chips}</div></article><article aria-label="第 8 張：讓這次被看見"><span>08</span><strong>讓這次<br>被看見</strong></article></div></div>`;
+    const storySlides = [
+      ["slide-01.png", "人物介紹、人物照片與雙方選色"],
+      ["slide-02.png", "從顏色的角度開始認識人物"],
+      ["slide-03.png", "她為自己選擇的白色與粉紅色"],
+      ["slide-04.png", "訪談後看見的淺紫色"],
+      ["slide-05.png", "訪談後感受到的淺金色"],
+      ["slide-06.png", "她為未來選擇的彩虹與透明"],
+      ["slide-07.png", "人物故事總結與人物照片"]
+    ].map(([file, description], index) => `<article class="story-card" aria-label="第 ${index + 1} 張：${description}"><img src="assets/images/person-story-sample/${file}" alt="色彩人物誌作品第 ${index + 1} 張：${description}" loading="lazy" decoding="async"></article>`).join("");
+    const summaryPreview = `<article class="story-card story-card--summary" aria-label="第 8 張：客戶個人色彩整理示意"><div class="story-summary-sheet" aria-hidden="true"><span>PERSON COLOR NOTE</span><strong>個人色彩整理</strong><div class="story-summary-line"></div><div class="story-summary-colors">${chips}</div><small>這一次對談裡<br>看見的色彩與你</small></div></article>`;
+    return `<div class="product-stage product-stage--carousel"><div class="story-deck" role="group" aria-label="色彩人物誌八張輪播貼文，以牌卡扇形展開">${storySlides}${summaryPreview}</div></div>`;
   }
 
   function priceMarkup(service) {
