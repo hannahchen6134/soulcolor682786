@@ -491,6 +491,15 @@ h3 { font-size: clamp(24px, 2vw, 32px); line-height: 1.42; }
 .product-stage--a4 { width: min(100%,320px); height: auto !important; aspect-ratio: 4/5; margin-inline: auto; padding: 10px; overflow: visible; }
 .product-stage--a4::before { inset: 8%; }
 .sample-work-image { width: 100%; max-width: 100%; height: auto; max-height: none; position: relative; z-index: 3; display: block; object-fit: contain; filter: drop-shadow(0 16px 22px rgba(68,37,32,.11)); }
+.a4-callout { width:max-content; position:absolute; z-index:4; display:flex; align-items:center; gap:7px; color:var(--wine); pointer-events:none; }
+.a4-callout > span { display:flex; flex-direction:column; gap:2px; }
+.a4-callout small { font-size:10px; line-height:1.35; letter-spacing:.12em; color:var(--muted); }
+.a4-callout strong { font:500 14px/1.45 var(--serif); letter-spacing:.08em; color:var(--wine-deep); }
+.a4-callout svg { width:58px; height:auto; overflow:visible; fill:none; stroke:rgba(154,91,75,.72); stroke-width:1.35; stroke-linecap:round; stroke-linejoin:round; }
+.a4-callout--quote { left:-138px; top:22%; text-align:right; }
+.a4-callout--quote > span { align-items:flex-end; }
+.a4-callout--angle { right:-120px; bottom:21%; text-align:left; }
+.a4-callout--angle strong { white-space:nowrap; }
 .mock-paper { width: min(61%,270px); aspect-ratio: 1/1.414; padding: 9%; position: relative; z-index: 3; display: flex; flex-direction: column; overflow: hidden; background: linear-gradient(145deg,#fffdfa,#fff7ef); border: 1px solid rgba(100,58,51,.14); box-shadow: 0 22px 48px rgba(68,37,32,.1); transform: rotate(-1.2deg); transition: transform .6s var(--ease); }
 .mock-paper > span, .ig-sheet > span { font: 500 8px/1.4 var(--latin); letter-spacing: .25em; color: var(--terracotta); }
 .mock-paper h3 { margin: 18% 0 9%; font-size: clamp(18px,1.9vw,25px); color: var(--wine); }
@@ -839,6 +848,12 @@ body[data-service] .detail-hero .page-light-field { background:
   .service-visual .product-stage { height: 250px; }
   .service-visual { margin-top: 20px; }
   .product-stage--a4 { width: min(72%,220px); height: auto !important; padding: 8px; }
+  .a4-callout { gap:4px; }
+  .a4-callout small { font-size:8px; letter-spacing:.08em; }
+  .a4-callout strong { font-size:11px; letter-spacing:.04em; }
+  .a4-callout svg { width:34px; }
+  .a4-callout--quote { left:-48px; top:18%; }
+  .a4-callout--angle { right:-50px; bottom:17%; }
   .mock-paper { width: min(60%,220px); }
   .paper-shadow { width: min(49%,195px); }
   .product-stage--single .mock-paper { width: min(36%,135px); right: 11%; top: 10%; }
