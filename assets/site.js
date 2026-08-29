@@ -22,7 +22,7 @@
     const paper = `<article class="mock-paper"><span>SOUL COLOR · PERSON PALETTE</span><h3>${title}</h3><div class="mock-rule"></div><p>用色彩記下這一次相遇裡<br>看見的不同角度</p><div class="mock-chips">${chips}</div></article>`;
     const summarySheetContent = summarySheetMarkup();
     if (type === "a4") return `<div class="product-stage product-stage--a4"><img class="sample-work-image" src="assets/images/sample-color-memory-aiqi.png" alt="色彩留影 A4 色彩人物整理作品範例"></div>`;
-    if (type === "single") return `<div class="product-stage product-stage--single" data-artwork-gallery="single" aria-label="開啟色彩人物卡與色彩留影作品檢視"><article class="person-card-sample"><img src="assets/images/sample-person-card-tony.jpg" alt="色彩人物卡案例：Tony 的人物介紹與雙方選色" loading="lazy" decoding="async"></article><article class="personal-summary-preview" aria-label="第二件成品：色彩留影示意">${summarySheetContent}</article><span class="gallery-hint" aria-hidden="true">滑動查看 · 點擊放大</span></div>`;
+    if (type === "single") return `<div class="product-stage product-stage--single" data-artwork-gallery="single" aria-label="色彩人物卡與色彩留影作品預覽"><article class="person-card-sample"><img src="assets/images/sample-person-card-tony.jpg" alt="色彩人物卡案例：Tony 的人物介紹與雙方選色" loading="lazy" decoding="async"></article><article class="personal-summary-preview" aria-label="第二件成品：色彩留影示意">${summarySheetContent}</article><span class="gallery-hint" aria-hidden="true">點擊貼文放大</span></div>`;
     const storySlides = [
       ["slide-01.png", "人物介紹、人物照片與雙方選色"],
       ["slide-02.png", "從顏色的角度開始認識人物"],
@@ -33,7 +33,7 @@
       ["slide-07.png", "人物故事總結與人物照片"]
     ].map(([file, description], index) => `<article class="story-card" aria-label="第 ${index + 1} 張：${description}"><img src="assets/images/person-story-sample/${file}" alt="色彩人物誌作品第 ${index + 1} 張：${description}" loading="lazy" decoding="async"></article>`).join("");
     const summaryPreview = `<article class="story-card story-card--summary" aria-label="第 8 張：客戶色彩留影示意">${summarySheetContent}</article>`;
-    return `<div class="product-stage product-stage--carousel" data-artwork-gallery="carousel" aria-label="開啟色彩人物誌八張作品檢視"><div class="story-deck" role="group" aria-label="色彩人物誌八張輪播貼文，以牌卡扇形展開">${storySlides}${summaryPreview}</div><span class="gallery-hint" aria-hidden="true">滑動查看 · 點擊放大</span></div>`;
+    return `<div class="product-stage product-stage--carousel" data-artwork-gallery="carousel" aria-label="色彩人物誌八張作品預覽"><div class="story-deck" role="group" aria-label="色彩人物誌八張輪播貼文，以牌卡扇形展開">${storySlides}${summaryPreview}</div><span class="gallery-hint" aria-hidden="true">點擊貼文放大</span></div>`;
   }
 
   function priceMarkup(service) {
@@ -138,82 +138,48 @@
   function initArtworkViewer() {
     const stages = document.querySelectorAll("[data-artwork-gallery]");
     if (!stages.length) return;
-    const dialog = document.createElement("dialog");
-    dialog.className = "artwork-viewer";
-    dialog.setAttribute("aria-label", "作品大圖檢視");
-    dialog.innerHTML = `<div class="artwork-viewer-shell"><header><div><p>SOUL COLOR · WORK SAMPLE</p><span data-viewer-count aria-live="polite">1 / 1</span></div><button type="button" class="viewer-close" data-viewer-close aria-label="關閉作品檢視">×</button></header><div class="artwork-viewer-track" data-viewer-track tabindex="0"></div><footer><button type="button" data-viewer-prev aria-label="上一張作品">←</button><p>左右滑動查看 · 點一下作品放大</p><button type="button" data-viewer-next aria-label="下一張作品">→</button></footer></div>`;
-    document.body.appendChild(dialog);
-    const track = dialog.querySelector("[data-viewer-track]");
-    const count = dialog.querySelector("[data-viewer-count]");
-    let activeIndex = 0;
-
-    const updateCount = () => {
-      const total = track.children.length;
-      activeIndex = total ? Math.max(0, Math.min(total - 1, Math.round(track.scrollLeft / Math.max(1, track.clientWidth)))) : 0;
-      count.textContent = `${activeIndex + 1} / ${total}`;
+    const cardSelector = ".person-card-sample,.personal-summary-preview,.story-deck article";
+    const collapseStage = stage => {
+      stage.classList.remove("has-expanded-artwork");
+      stage.querySelectorAll(cardSelector).forEach(card => {
+        card.classList.remove("is-expanded");
+        card.setAttribute("aria-expanded", "false");
+      });
     };
-    const goTo = index => {
-      const total = track.children.length;
-      if (!total) return;
-      activeIndex = (index + total) % total;
-      track.children[activeIndex].scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", inline: "center", block: "nearest" });
-      count.textContent = `${activeIndex + 1} / ${total}`;
-    };
-    const closeViewer = () => dialog.open && dialog.close();
-    const openViewer = type => {
-      const items = artworkItems(type);
-      track.innerHTML = items.map((item, index) => `<figure class="artwork-viewer-slide" aria-label="第 ${index + 1} 張：${item.alt}"><div class="artwork-viewer-canvas" data-viewer-canvas>${item.src ? `<img src="${item.src}" alt="${item.alt}" draggable="false">` : `<div class="viewer-summary-card">${item.html}</div>`}<button type="button" class="viewer-zoom" data-viewer-zoom aria-label="放大第 ${index + 1} 張作品">＋ 放大</button></div></figure>`).join("");
-      activeIndex = 0;
-      count.textContent = `1 / ${items.length}`;
-      if (typeof dialog.showModal === "function") dialog.showModal();
-      else dialog.setAttribute("open", "");
-      document.body.classList.add("viewer-open");
-      requestAnimationFrame(() => { track.scrollLeft = 0; dialog.querySelector("[data-viewer-close]").focus(); });
+    const toggleCard = card => {
+      const stage = card.closest("[data-artwork-gallery]");
+      const wasExpanded = card.classList.contains("is-expanded");
+      stages.forEach(collapseStage);
+      if (wasExpanded) return;
+      stage.classList.add("has-expanded-artwork");
+      card.classList.add("is-expanded");
+      card.setAttribute("aria-expanded", "true");
     };
 
     stages.forEach(stage => {
-      const link = stage.closest("a");
-      if (link) link.setAttribute("aria-haspopup", "dialog");
-      else {
-        stage.tabIndex = 0;
-        stage.setAttribute("role", "button");
-        stage.setAttribute("aria-haspopup", "dialog");
-      }
+      stage.closest("a")?.removeAttribute("aria-haspopup");
+      stage.querySelectorAll(cardSelector).forEach((card, index) => {
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-expanded", "false");
+        if (!card.getAttribute("aria-label")) card.setAttribute("aria-label", `放大第 ${index + 1} 張作品`);
+      });
     });
     document.addEventListener("click", event => {
-      const stage = event.target.closest("[data-artwork-gallery]");
-      if (!stage) return;
+      const card = event.target.closest(cardSelector);
+      if (!card?.closest("[data-artwork-gallery]")) return;
       event.preventDefault();
-      openViewer(stage.dataset.artworkGallery);
+      event.stopPropagation();
+      toggleCard(card);
     });
     document.addEventListener("keydown", event => {
-      const stage = event.target.closest?.("[data-artwork-gallery]");
-      if (stage && !stage.closest("a") && (event.key === "Enter" || event.key === " ")) {
+      const card = event.target.closest?.(cardSelector);
+      if (card?.closest("[data-artwork-gallery]") && (event.key === "Enter" || event.key === " ")) {
         event.preventDefault();
-        openViewer(stage.dataset.artworkGallery);
+        toggleCard(card);
       }
-      if (!dialog.open) return;
-      if (event.key === "ArrowLeft") { event.preventDefault(); goTo(activeIndex - 1); }
-      if (event.key === "ArrowRight") { event.preventDefault(); goTo(activeIndex + 1); }
+      if (event.key === "Escape") stages.forEach(collapseStage);
     });
-    dialog.addEventListener("click", event => {
-      if (event.target === dialog || event.target.closest("[data-viewer-close]")) return closeViewer();
-      if (event.target.closest("[data-viewer-prev]")) return goTo(activeIndex - 1);
-      if (event.target.closest("[data-viewer-next]")) return goTo(activeIndex + 1);
-      const zoom = event.target.closest("[data-viewer-zoom]");
-      const canvas = zoom?.closest("[data-viewer-canvas]") || event.target.closest("[data-viewer-canvas]");
-      if (!canvas || (!zoom && !event.target.matches("img,.viewer-summary-card,.viewer-summary-card *"))) return;
-      const enlarged = canvas.classList.toggle("is-zoomed");
-      const button = canvas.querySelector("[data-viewer-zoom]");
-      button.textContent = enlarged ? "－ 縮小" : "＋ 放大";
-      button.setAttribute("aria-label", `${enlarged ? "縮小" : "放大"}這張作品`);
-    });
-    let scrollFrame = 0;
-    track.addEventListener("scroll", () => {
-      cancelAnimationFrame(scrollFrame);
-      scrollFrame = requestAnimationFrame(updateCount);
-    }, { passive: true });
-    dialog.addEventListener("close", () => document.body.classList.remove("viewer-open"));
   }
 
   function initReveal() {
