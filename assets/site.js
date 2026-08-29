@@ -33,7 +33,7 @@
       ["slide-07.png", "人物故事總結與人物照片"]
     ].map(([file, description], index) => `<article class="story-card" aria-label="第 ${index + 1} 張：${description}"><img src="assets/images/person-story-sample/${file}" alt="色彩人物誌作品第 ${index + 1} 張：${description}" loading="lazy" decoding="async"></article>`).join("");
     const summaryPreview = `<article class="story-card story-card--summary" aria-label="第 8 張：客戶色彩留影示意">${summarySheetContent}</article>`;
-    return `<div class="product-stage product-stage--carousel" data-artwork-gallery="carousel" aria-label="色彩人物誌八張作品預覽"><div class="story-deck" role="group" aria-label="色彩人物誌八張輪播貼文，以牌卡扇形展開">${storySlides}${summaryPreview}</div><span class="gallery-hint" aria-hidden="true">點擊貼文放大</span></div>`;
+    return `<div class="product-stage product-stage--carousel" data-artwork-gallery="carousel" aria-label="色彩人物誌八張作品預覽"><div class="story-deck" role="group" aria-label="色彩人物誌八張輪播貼文，依序重疊呈現，色彩留影位於最後一層">${storySlides}${summaryPreview}</div><span class="gallery-hint" aria-hidden="true">依序點擊展開</span></div>`;
   }
 
   function priceMarkup(service) {
