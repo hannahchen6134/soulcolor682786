@@ -495,7 +495,7 @@ h3 { font-size: clamp(24px, 2vw, 32px); line-height: 1.42; }
 .a4-callout > span { display:flex; flex-direction:column; gap:2px; }
 .a4-callout small { font-size:10px; line-height:1.35; letter-spacing:.12em; color:var(--muted); }
 .a4-callout strong { font:500 14px/1.45 var(--serif); letter-spacing:.08em; color:var(--wine-deep); }
-.a4-callout svg { width:58px; height:auto; overflow:visible; fill:none; stroke:rgba(154,91,75,.72); stroke-width:1.35; stroke-linecap:round; stroke-linejoin:round; }
+.a4-callout svg { width:68px; height:auto; overflow:visible; fill:none; stroke:rgba(130,76,65,.5); stroke-width:.9; stroke-linecap:round; stroke-linejoin:round; }
 .a4-callout--quote { left:-138px; top:22%; text-align:right; }
 .a4-callout--quote > span { align-items:flex-end; }
 .a4-callout--angle { right:-120px; bottom:21%; text-align:left; }
@@ -851,7 +851,7 @@ body[data-service] .detail-hero .page-light-field { background:
   .a4-callout { gap:4px; }
   .a4-callout small { font-size:8px; letter-spacing:.08em; }
   .a4-callout strong { font-size:11px; letter-spacing:.04em; }
-  .a4-callout svg { width:34px; }
+  .a4-callout svg { width:39px; stroke-width:.8; }
   .a4-callout--quote { left:-48px; top:18%; }
   .a4-callout--angle { right:-50px; bottom:17%; }
   .mock-paper { width: min(60%,220px); }
@@ -868,6 +868,9 @@ body[data-service] .detail-hero .page-light-field { background:
   .ig-sheet .mock-chips { gap: 2px; }
   .ig-sheet .mock-chips i { width: 12px; height: 12px; }
   .story-deck { width: 100%; height: 230px; }
+  .service-row--person-story .service-visual { margin-top:8px; }
+  .service-row--person-story .product-stage--carousel { height:188px; padding-top:0; padding-bottom:0; }
+  .service-row--person-story .story-deck { height:178px; }
   .story-deck article { width: clamp(84px,30%,108px); bottom: 12px; }
   .story-deck article:nth-child(1) { --x:2%; }
   .story-deck article:nth-child(2) { --x:13%; }
