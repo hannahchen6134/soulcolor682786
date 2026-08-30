@@ -413,17 +413,16 @@ h3 { font-size: clamp(24px, 2vw, 32px); line-height: 1.42; }
 .service-compare-note li { min-height: 68px; padding: 5px 22px; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid rgba(100,58,51,.17); }
 .service-compare-note li span { margin-bottom: 5px; font: italic 400 13px var(--latin); letter-spacing: .16em; color: var(--terracotta); }
 .service-compare-note li strong { font-size: 14px; font-weight: 400; line-height: 1.65; letter-spacing: .06em; color: var(--wine); }
-.service-process-compact { padding: 24px var(--gutter); background: #f6eee6; border-bottom: 1px solid var(--line); }
-.service-process-compact > summary { min-height: 58px; padding: 0 18px 0 21px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; list-style: none; font-size: 13px; font-weight: 500; letter-spacing: .07em; color: var(--wine-deep); background: rgba(255,251,246,.78); border: 1px solid rgba(130,76,65,.3); border-radius: 12px; box-shadow: 0 8px 22px rgba(68,37,32,.06); transition: background .25s ease,border-color .25s ease,transform .25s ease; }
-.service-process-compact > summary:hover { background: #fffaf5; border-color: rgba(130,76,65,.5); transform: translateY(-1px); }
-.service-process-compact > summary::-webkit-details-marker { display: none; }
-.service-process-compact > summary::after { content: '＋'; width: 30px; height: 30px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; font-size: 17px; font-weight: 400; color: #fffaf5; background: var(--wine); }
-.service-process-compact[open] > summary::after { content: '－'; }
-.service-process-compact ol { margin: 0; padding: 8px 0 44px; display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; list-style: none; }
-.service-process-compact li { padding-top: 18px; border-top: 1px solid rgba(100,58,51,.16); }
-.service-process-compact li > span { font: italic 400 20px/1 var(--latin); color: var(--terracotta); }
-.service-process-compact li strong { display: block; margin: 16px 0 8px; font-size: 14px; color: var(--wine); }
-.service-process-compact li p { margin: 0; font-size: 12px; line-height: 1.65; color: var(--muted); }
+.service-process { padding: clamp(64px,7vw,92px) var(--gutter); display: grid; grid-template-columns: minmax(220px,300px) minmax(0,1fr); gap: clamp(52px,7vw,96px); align-items: start; background: linear-gradient(155deg,#faf5ef 0%,#f3e8df 54%,#f8f1ea 100%); border-bottom: 1px solid rgba(100,58,51,.14); }
+.service-process-head .eyebrow { margin: 0 0 13px; }
+.service-process-head h2 { margin: 0 0 18px; font-size: clamp(25px,2.4vw,34px); line-height: 1.4; color: var(--wine-deep); }
+.service-process-head > p:last-child { max-width: 280px; margin: 0; font-size: 13px; line-height: 1.8; letter-spacing: .035em; color: var(--muted); }
+.service-process ol { margin: 10px 0 0; padding: 0; position: relative; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(18px,3vw,36px); list-style: none; }
+.service-process ol::before { content: ''; position: absolute; left: 17px; right: 0; top: 15px; height: 1px; background: linear-gradient(90deg,rgba(149,88,74,.42),rgba(149,88,74,.12)); }
+.service-process li { position: relative; z-index: 1; min-width: 0; }
+.service-process li > span { width: 34px; height: 30px; display: grid; place-items: center; position: relative; z-index: 1; font: italic 400 19px/1 var(--latin); color: var(--terracotta); background: #f5eae1; }
+.service-process li strong { display: block; margin: 22px 0 9px; font-size: 14px; font-weight: 500; line-height: 1.55; color: var(--wine); }
+.service-process li p { margin: 0; font-size: 12px; line-height: 1.72; color: var(--muted); }
 .services-list { padding: 0 var(--gutter); background: var(--quiet-paper); }
 .services-list + .closing-cta--brand { margin-top:-1px; background:
   radial-gradient(ellipse 92% 66% at 8% 0%,rgba(255,252,247,.5) 0%,rgba(255,252,247,.12) 42%,transparent 70%),
@@ -835,6 +834,16 @@ body[data-service] .detail-hero .page-light-field { background:
   .profile-belief blockquote span + span { margin-top: 8px; }
   .closing-cta--profile { min-height:196px; padding-top:36px; padding-bottom:36px; flex-direction:column; justify-content:center; text-align:center; background:linear-gradient(180deg,#7f4c45 0%,#805049 68%,#855048 100%); }
   .closing-cta--profile > p { margin-bottom:24px; }
+  .service-process { padding-top: 52px; padding-bottom: 54px; grid-template-columns: 1fr; gap: 36px; }
+  .service-process-head h2 { font-size: 22px; }
+  .service-process-head > p:last-child { max-width: 310px; }
+  .service-process ol { margin: 0; grid-template-columns: 1fr; gap: 0; }
+  .service-process ol::before { left: 15px; right: auto; top: 14px; bottom: 16px; width: 1px; height: auto; background: linear-gradient(180deg,rgba(149,88,74,.42),rgba(149,88,74,.12)); }
+  .service-process li { min-height: 92px; padding: 0 0 26px; display: grid; grid-template-columns: 38px minmax(0,1fr); column-gap: 14px; }
+  .service-process li:last-child { min-height: 0; padding-bottom: 0; }
+  .service-process li > span { width: 30px; height: 30px; }
+  .service-process li strong { margin: 3px 0 7px; font-size: 14px; }
+  .service-process li p { grid-column: 2; font-size: 12px; }
   .service-compare-note { min-height: auto; padding-top: 38px; padding-bottom: 40px; grid-template-columns: 1fr; gap: 24px; }
   .service-compare-note ul { grid-template-columns: 1fr; }
   .service-compare-note li { min-height: 52px; padding: 13px 0; display: grid; grid-template-columns: 36px 1fr; align-items: center; border-left: 0; border-top: 1px solid rgba(100,58,51,.14); }
@@ -935,10 +944,6 @@ body[data-service] .detail-hero .page-light-field { background:
   .footer-brand span { font-size: 7px; letter-spacing: .26em; opacity: .4; }
   .site-footer nav { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 22px; }
   .site-footer nav a { min-height: 40px; }
-  .service-process-compact ol { grid-template-columns: 1fr; gap: 0; padding-bottom: 28px; }
-  .service-process-compact li { padding: 18px 0; display: grid; grid-template-columns: 40px 1fr; gap: 12px; }
-  .service-process-compact li strong { margin-top: 0; }
-  .service-process-compact li p { grid-column: 2; }
 }
 
 @media (max-width: 374px) {
