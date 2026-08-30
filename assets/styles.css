@@ -121,6 +121,7 @@ body[data-page="home"] .site-header { border-bottom:0; box-shadow:none; }
 body[data-page="home"] .home-hero { margin-top:-1px; }
 body[data-page="home"] .light-field { top:-28px; }
 body[data-page="home"] .home-hero::before { content:''; position:absolute; top:0; left:0; right:0; height:118px; z-index:0; pointer-events:none; background:linear-gradient(180deg,rgba(247,241,232,.98) 0%,rgba(247,241,232,.78) 32%,rgba(247,241,232,.28) 70%,transparent 100%); }
+body[data-page="home"] .home-hero::after { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.34; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.46' numOctaves='4' seed='21'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='.14'/%3E%3C/svg%3E"); background-size:180px 180px; mix-blend-mode:multiply; }
 .light-field, .page-light-field { position: absolute; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; background:
   radial-gradient(ellipse 62% 72% at 7% 22%,rgba(235,155,181,.28),transparent 72%),
   radial-gradient(ellipse 58% 68% at 8% 86%,rgba(239,198,112,.2),transparent 74%),
@@ -850,7 +851,8 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .section-pad { padding-top: 56px; padding-bottom: 56px; }
   .button { min-height: 50px; max-width: 260px; font-size: 11.8px; }
   .text-link { min-height: 50px; font-size: 11.8px; }
-  .home-hero { min-height: auto; padding-top: 74px; padding-bottom: 80px; grid-template-columns: 1fr; gap: 48px; background:var(--paper-light); }
+  .home-hero { min-height: auto; padding-top: 74px; padding-bottom: 80px; grid-template-columns: 1fr; gap: 48px; background:radial-gradient(ellipse 78% 34% at 12% 10%,rgba(216,151,132,.1),transparent 72%),radial-gradient(ellipse 72% 38% at 91% 42%,rgba(226,190,133,.08),transparent 74%),linear-gradient(158deg,#fbf7f1 0%,#f7efe6 54%,#faf5ed 100%); }
+  body[data-page="home"] .home-hero::after { opacity:.48; }
   body[data-page="home"] .home-hero::before { display:none; }
   body[data-page="home"] .home-hero .light-field { top:52%; bottom:-1px; -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.35) 13%,#000 28%); mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.35) 13%,#000 28%); }
   .hero-copy { max-width: none; text-align: center; }
