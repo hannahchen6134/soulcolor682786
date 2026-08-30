@@ -25,7 +25,7 @@
     if (type === "single") return `<div class="product-stage product-stage--single" data-artwork-gallery="single" aria-label="色彩人物卡與色彩留影作品預覽"><article class="person-card-sample"><img src="assets/images/sample-person-card-tony.jpg" alt="色彩人物卡案例：Tony 的人物介紹與雙方選色" loading="lazy" decoding="async"></article><article class="personal-summary-preview" aria-label="第二件成品：色彩留影示意">${summarySheetContent}</article></div>`;
     const storySlides = [
       ["slide-01.png", "人物介紹、人物照片與雙方選色"],
-      ["slide-02.png", "從顏色的角度開始認識人物"],
+      ["slide-02.png", "從色彩的角度開始認識人物"],
       ["slide-03.png", "她為自己選擇的白色與粉紅色"],
       ["slide-04.png", "訪談後看見的淺紫色"],
       ["slide-05.png", "訪談後感受到的淺金色"],
@@ -61,7 +61,7 @@
   function initShell() {
     const header = document.querySelector("[data-site-header]");
     if (header) {
-      header.innerHTML = `<a class="brand" href="index.html" aria-label="Soul Color 首頁"><span>SOUL COLOR</span><small>PERSON PALETTE</small></a><nav class="desktop-nav" aria-label="主要導覽">${navItems.map(([key,label,href]) => `<a ${page === key ? 'aria-current="page"' : ""} href="${href}">${label}</a>`).join("")}</nav><a class="nav-order order-link" href="#">立即預約</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span><b class="sr-only">開啟選單</b></button><div class="mobile-menu" id="mobileMenu" hidden>${navItems.map(([key,label,href]) => `<a ${page === key ? 'aria-current="page"' : ""} href="${href}">${label}</a>`).join("")}<a class="button button--primary order-link" href="#">立即預約</a></div>`;
+      header.innerHTML = `<a class="brand" href="index.html" aria-label="Soul Color 首頁"><span>SOUL COLOR</span><small>PERSON PALETTE</small></a><nav class="desktop-nav" aria-label="主要導覽">${navItems.map(([key,label,href]) => `<a ${page === key ? 'aria-current="page"' : ""} href="${href}">${label}</a>`).join("")}</nav><a class="nav-order order-link" href="${config.orderURL}" target="_blank" rel="noopener noreferrer">立即預約</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span><b class="sr-only">開啟選單</b></button><div class="mobile-menu" id="mobileMenu" hidden>${navItems.map(([key,label,href]) => `<a ${page === key ? 'aria-current="page"' : ""} href="${href}">${label}</a>`).join("")}<a class="button button--primary order-link" href="${config.orderURL}" target="_blank" rel="noopener noreferrer">立即預約</a></div>`;
     }
     const footer = document.querySelector("[data-site-footer]");
     if (footer) footer.innerHTML = `<div class="footer-brand"><span>SOUL COLOR</span></div><nav aria-label="頁尾導覽"><a href="about.html">人物調色盤</a><a href="profile.html">關於我</a><a href="services.html">服務方案</a><a href="faq.html">FAQ</a></nav><small>© ${new Date().getFullYear()} Soul Color</small>`;
@@ -76,12 +76,19 @@
     const toggle = document.querySelector(".menu-toggle");
     const menu = document.querySelector(".mobile-menu");
     if (!toggle || !menu) return;
-    toggle.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!open));
-      menu.hidden = open;
-      document.body.classList.toggle("menu-open", !open);
-      toggle.querySelector("b").textContent = open ? "開啟選單" : "關閉選單";
+    const setOpen = open => {
+      toggle.setAttribute("aria-expanded", String(open));
+      menu.hidden = !open;
+      document.body.classList.toggle("menu-open", open);
+      toggle.querySelector("b").textContent = open ? "關閉選單" : "開啟選單";
+    };
+    toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+    menu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setOpen(false)));
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setOpen(false);
+        toggle.focus();
+      }
     });
   }
 
@@ -97,9 +104,20 @@
       : `<a class="service-visual" href="service-${slug}.html" aria-label="查看${service.title}作品與方案詳情">${mockupMarkup(service.mockup, service.title)}</a>`;
     root.innerHTML = Object.entries(config.services).map(([slug, service], index) => `
       <article class="service-row service-row--${slug} ${index % 2 ? "service-row--reverse" : ""} reveal" id="service-${slug}">
-        <div class="service-copy"><div class="service-heading"><span class="section-number">${service.number}</span></div><h2><a href="service-${slug}.html">${service.title}<span aria-hidden="true">↗</span></a></h2><p class="service-positioning">${service.positioning}</p>${overviewPriceMarkup(service)}<p class="service-duration">${service.duration}</p><details class="service-more"><summary>查看價格與方案內容</summary><div class="service-more-panel"><dl class="service-alt-prices"><div><dt>原價</dt><dd>NT$ ${service.prices.original}</dd></div><div><dt>早鳥價</dt><dd>NT$ ${service.prices.early}<small>${service.prices.earlyNote}</small></dd></div></dl><div class="service-includes"><h3>你會收到</h3><ul>${deliverablesMarkup(service.deliverables)}</ul></div></div></details></div>
+        <div class="service-copy"><div class="service-heading"><span class="section-number">${service.number}</span><p class="service-purpose">${service.purpose}</p></div><h2><a href="service-${slug}.html">${service.title}<span aria-hidden="true">↗</span></a></h2><p class="service-positioning">${service.positioning}</p><p class="service-use-case">${service.useCase}</p>${overviewPriceMarkup(service)}<p class="service-duration">${service.duration}</p><details class="service-more"><summary>查看價格與方案內容</summary><div class="service-more-panel"><dl class="service-alt-prices"><div><dt>原價</dt><dd>NT$ ${service.prices.original}</dd></div><div><dt>早鳥價</dt><dd>NT$ ${service.prices.early}<small>${service.prices.earlyNote}</small></dd></div></dl><div class="service-includes"><h3>你會收到</h3><ul>${deliverablesMarkup(service.deliverables)}</ul></div></div></details></div>
         ${overviewVisual(slug, service)}
       </article>`).join("");
+  }
+
+  function renderHomeServices() {
+    const root = document.querySelector("[data-home-services]");
+    if (!root) return;
+    root.innerHTML = Object.entries(config.services).map(([slug, service]) => `
+      <a class="service-portal" href="service-${slug}.html">
+        <span>${service.number}</span>
+        <div><small>${service.purpose}</small><strong>${service.title}</strong><p>${service.homeDescription}</p></div>
+        <b aria-hidden="true">→</b>
+      </a>`).join("");
   }
 
   function renderServiceDetail() {
@@ -132,7 +150,7 @@
     ];
     const descriptions = [
       "人物介紹、人物照片與雙方選色",
-      "從顏色的角度開始認識人物",
+      "從色彩的角度開始認識人物",
       "她為自己選擇的白色與粉紅色",
       "訪談後看見的淺紫色",
       "訪談後感受到的淺金色",
@@ -332,6 +350,7 @@
 
   initShell();
   initMenu();
+  renderHomeServices();
   renderServicesOverview();
   renderServiceDetail();
   renderWorkArtifacts();
