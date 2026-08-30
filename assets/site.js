@@ -21,7 +21,7 @@
     const chips = paletteChips;
     const paper = `<article class="mock-paper"><span>SOUL COLOR · PERSON PALETTE</span><h3>${title}</h3><div class="mock-rule"></div><p>用色彩記下這一次相遇裡<br>看見的不同角度</p><div class="mock-chips">${chips}</div></article>`;
     const summarySheetContent = summarySheetMarkup();
-    if (type === "a4") return `<div class="product-stage product-stage--a4"><span class="a4-callout a4-callout--quote"><strong>你說出的金句</strong><svg viewBox="0 0 78 26" aria-hidden="true"><path d="M2 21 72 4"></path><path d="m65 2 8 2-6 6"></path></svg></span><img class="sample-work-image" src="assets/images/sample-color-memory-aiqi.png" alt="色彩留影 A4 色彩人物整理作品範例"><span class="a4-callout a4-callout--angle"><svg viewBox="0 0 78 26" aria-hidden="true"><path d="m76 21-70-17"></path><path d="m13 2-8 2 6 6"></path></svg><span><small>也會留下</small><strong>我看見你的角度</strong></span></span></div>`;
+    if (type === "a4") return `<div class="product-stage product-stage--a4"><span class="a4-callout a4-callout--quote"><span class="a4-callout-copy"><small>訪談中留下</small><strong>你說出的金句</strong></span><svg viewBox="0 0 90 32" aria-hidden="true"><path d="M2 9 C32 9 55 17 87 27"></path><path d="m80 21 8 6-9 2"></path></svg></span><img class="sample-work-image" src="assets/images/sample-color-memory-aiqi.png" alt="色彩留影 A4 色彩人物整理作品範例"><span class="a4-callout a4-callout--angle"><svg viewBox="0 0 180 38" aria-hidden="true"><path d="M178 9 C122 9 61 17 8 29"></path><path d="m15 23-8 6 10 2"></path></svg><span class="a4-callout-copy"><small>也會留下</small><strong>我看見你的角度</strong></span></span></div>`;
     if (type === "single") return `<div class="product-stage product-stage--single" data-artwork-gallery="single" aria-label="色彩人物卡與色彩留影作品預覽"><article class="person-card-sample"><img src="assets/images/sample-person-card-tony.jpg" alt="色彩人物卡案例：Tony 的人物介紹與雙方選色" loading="lazy" decoding="async"></article><article class="personal-summary-preview" aria-label="第二件成品：色彩留影示意">${summarySheetContent}</article></div>`;
     const storySlides = [
       ["slide-01.png", "人物介紹、人物照片與雙方選色"],
@@ -190,7 +190,7 @@
   }
 
   function initReveal() {
-    const items = document.querySelectorAll(".reveal");
+    const items = document.querySelectorAll(".reveal, .process-reveal");
     if (!items.length) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced || !("IntersectionObserver" in window)) return items.forEach(el => el.classList.add("is-visible"));
