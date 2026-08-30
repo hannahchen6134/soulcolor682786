@@ -7,7 +7,7 @@ window.SOUL_COLOR_CONFIG = {
       tier: "一頁紀錄 · 適合私人保存",
       duration: "約 40min～1hr 選色＋線上訪談",
       prices: { original: "890", trial: "680", trialNote: "限額 10 位", early: "780", earlyNote: "今年 8 月底前報名" },
-      positioning: "把這一次對談裡看見的色彩與你，整理成一頁可以留下來的紀錄。",
+      positioning: "整理為我看見你的金句及角度。",
       fit: ["想先體驗人物調色盤", "想留下一份私人的色彩紀錄", "不需要社群貼文，但想把這次對談保存下來"],
       deliverables: ["一張 A4 色彩人物整理（電子檔）｜內容包含：人物金句萃取、我看見你的角度。"],
       mockup: "a4"
