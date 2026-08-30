@@ -201,9 +201,12 @@
   }
 
   function initTitleReveal() {
-    const titles = document.querySelectorAll("main h1, main h2");
+    const pageTitles = [...document.querySelectorAll("main h1")];
+    const sectionTitles = [...document.querySelectorAll("main h2")].filter(title => !title.closest(".reveal, .process-reveal"));
+    const titles = [...pageTitles, ...sectionTitles];
     if (!titles.length) return;
-    titles.forEach(title => title.classList.add("title-reveal"));
+    pageTitles.forEach(title => title.classList.add("title-reveal", "page-title-reveal"));
+    sectionTitles.forEach(title => title.classList.add("title-reveal", "section-title-reveal"));
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced || !("IntersectionObserver" in window)) return titles.forEach(title => title.classList.add("is-title-visible"));
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
