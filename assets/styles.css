@@ -242,11 +242,11 @@ body[data-page="home"] .home-hero::after { content:''; position:absolute; inset:
 .home-services-all { margin-top: 34px; }
 .home-close, .closing-cta { min-height: 360px; padding: 76px var(--gutter); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
 .home-close { background:
-  radial-gradient(ellipse 42% 72% at 12% 50%,rgba(255,252,244,.58),transparent 72%),
-  var(--paper-deep); }
+  radial-gradient(ellipse 54% 76% at 12% 52%,rgba(255,252,244,.54),transparent 72%),
+  linear-gradient(180deg,#e9d8ce 0%,#e2c9bd 24%,#ead8cc 58%,#efe4d9 100%); }
 .home-close h2 { margin-bottom: 28px; color: var(--wine); }
 .home-close h2 span, .closing-cta > p span, .closing-cta > div > p span { display: block; }
-.client-voices { scroll-margin-top:82px; display: grid; grid-template-columns: minmax(250px,.5fr) minmax(520px,1.1fr); gap: clamp(50px,7vw,100px); align-items: start; background: linear-gradient(145deg,#f3e9df 0%,#f8f0e8 13%,#fdf9f4 52%,#f2e6dc 100%); }
+.client-voices { scroll-margin-top:82px; display: grid; grid-template-columns: minmax(250px,.5fr) minmax(520px,1.1fr); gap: clamp(50px,7vw,100px); align-items: start; background:linear-gradient(180deg,#ead9d0 0%,#e8ded7 11%,#f5eee8 31%,#fdfaf6 62%,#e9d8ce 100%); }
 .client-voices-copy { max-width: 420px; }
 .client-voices-copy h2 { margin: 0 0 22px; color: var(--wine); }
 .client-voices-copy h2 span { display: block; }
@@ -718,7 +718,7 @@ body[data-page="services"]:not([data-service]):has(.closing-cta.is-visible) .sit
 .work-format-copy > span { font: 500 11px var(--latin); letter-spacing: .26em; color: var(--terracotta); }
 .work-format-copy h3 { margin: 16px 0 13px; color: var(--wine); }
 .work-format-copy p { max-width: 400px; color: var(--muted); }
-.works-cases { margin-top:-1px; padding-top:clamp(58px,5.6vw,80px); background:linear-gradient(180deg,#f3ece3 0%,#f6efe8 15%,#faf6f0 46%,#f3e9df 100%); }
+.works-cases { margin-top:-1px; padding-top:clamp(58px,5.6vw,80px); background:linear-gradient(180deg,#f3ece3 0%,#efdcd6 10%,#f5e9e2 29%,#fbf7f1 59%,#ead9d0 100%); }
 .works-cases-head { max-width: 760px; margin-bottom: clamp(52px,7vw,88px); }
 .works-cases-head h2 { color: var(--wine); }
 .works-case { display: grid; grid-template-columns: minmax(260px,.72fr) minmax(420px,1.28fr); gap: clamp(54px,8vw,120px); align-items: center; }
