@@ -549,10 +549,10 @@ body[data-page="profile"] .profile-ending .site-footer { clip-path:none; transit
 .page-ending { --ending-gradient:linear-gradient(to top,#311a18 0%,#4b2925 24%,#6f4039 49%,#9a655d 68%,#c9a096 84%,#f2ebe0 100%); position:relative; isolation:isolate; overflow:hidden; color:#fff8f1; background:transparent; }
 .page-ending--about { --ending-gradient:linear-gradient(to top,#311a18 0%,#442520 28%,#52302a 54%,#5a332d 78%,#573029 100%); }
 .page-ending::before,
-.profile-ending::before { content:''; position:absolute; inset:0; z-index:-2; pointer-events:none; background:var(--ending-gradient); transform:scaleY(0); transform-origin:bottom; transition:transform 1.45s cubic-bezier(.22,.58,.3,1); }
+.profile-ending::before { content:''; position:absolute; inset:0; z-index:-2; pointer-events:none; background:var(--ending-gradient); clip-path:inset(100% 0 0 0); transition:clip-path 1.45s cubic-bezier(.22,.58,.3,1); }
 .page-ending::after,
 .profile-ending::after { content:''; position:absolute; inset:-18% -12%; z-index:-1; pointer-events:none; opacity:.9; background:radial-gradient(ellipse 48% 54% at 18% 20%,rgba(255,224,208,.17),transparent 72%),radial-gradient(ellipse 46% 58% at 86% 66%,rgba(190,137,126,.12),transparent 74%); clip-path:inset(100% 0 0 0); transition:clip-path 1.45s cubic-bezier(.22,.58,.3,1); }
-.ending-reveal.is-visible::before { transform:scaleY(1); }
+.ending-reveal.is-visible::before { clip-path:inset(0); }
 .ending-reveal.is-visible::after { clip-path:inset(0); animation:profile-ending-breathe 18s 1.45s ease-in-out infinite; }
 .page-ending .closing-cta,
 .page-ending .site-footer { background:transparent; }
@@ -1220,7 +1220,7 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .luminous-palette i, .profile-glows i { animation: none !important; opacity: .82; transform: none; }
   .reveal { opacity: 1; transform: none; }
   .process-reveal .service-process-head > *, .process-reveal li { opacity: 1; transform: none; }
-  .ending-reveal::before { transform:scaleY(1) !important; }
+  .ending-reveal::before { clip-path:inset(0) !important; }
   .ending-reveal::after { clip-path:inset(0) !important; animation:none !important; }
   .ending-reveal .site-footer,
   .ending-reveal .closing-cta.reveal > * { opacity:1 !important; transform:none !important; animation:none !important; }
