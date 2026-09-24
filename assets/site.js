@@ -233,7 +233,8 @@
   }
 
   function initReveal() {
-    const items = document.querySelectorAll(".reveal, .process-reveal");
+    const items = [...document.querySelectorAll(".reveal, .process-reveal")]
+      .filter(item => !item.closest(".ending-reveal"));
     const endings = document.querySelectorAll(".ending-reveal");
     if (!items.length && !endings.length) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
