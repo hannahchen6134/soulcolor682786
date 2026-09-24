@@ -258,6 +258,22 @@
     const sectionTitles = [...document.querySelectorAll("main h2")].filter(title => !title.closest(".reveal, .process-reveal"));
     const titles = [...pageTitles, ...sectionTitles];
     if (!titles.length) return;
+    titles.forEach(title => {
+      const directSpans = [...title.children].filter(child => child.tagName === "SPAN");
+      if (directSpans.length && directSpans.length === title.children.length) {
+        directSpans.forEach(span => span.classList.add("title-reveal-line"));
+        return;
+      }
+      if (title.querySelector("br")) {
+        const lines = title.innerHTML.split(/<br\s*\/?\s*>/i);
+        title.innerHTML = lines.map(line => `<span class="title-reveal-line">${line}</span>`).join("");
+        return;
+      }
+      const line = document.createElement("span");
+      line.className = "title-reveal-line";
+      while (title.firstChild) line.appendChild(title.firstChild);
+      title.appendChild(line);
+    });
     pageTitles.forEach(title => title.classList.add("title-reveal", "page-title-reveal"));
     sectionTitles.forEach(title => title.classList.add("title-reveal", "section-title-reveal"));
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
