@@ -546,7 +546,7 @@ body[data-page="profile"] .profile-ending .site-footer { clip-path:none; transit
 .closing-cta--profile > p { max-width:520px; margin:0; }
 .closing-cta--profile .button { flex:0 0 auto; box-shadow:0 12px 28px rgba(49,24,20,.2),0 0 0 4px rgba(255,248,241,.06); }
 
-.page-ending { --ending-gradient:linear-gradient(to top,#311a18 0%,#4b2925 24%,#6f4039 49%,#9a655d 68%,#c9a096 84%,#f2ebe0 100%); position:relative; isolation:isolate; overflow:hidden; color:#fff8f1; background:transparent; }
+.page-ending { --ending-gradient:linear-gradient(to top,#311a18 0%,#4b2925 24%,#6f4039 49%,#9a655d 68%,#c9a096 82%,rgba(242,235,224,.72) 91%,rgba(242,235,224,0) 100%); position:relative; isolation:isolate; overflow:hidden; color:#fff8f1; background:transparent; }
 .page-ending--about { --ending-gradient:linear-gradient(to top,#311a18 0%,#442520 28%,#52302a 54%,#5a332d 78%,#573029 100%); }
 .page-ending::before,
 .profile-ending::before { content:''; position:absolute; inset:0; z-index:-2; pointer-events:none; background:var(--ending-gradient); clip-path:inset(100% 0 0 0); transition:clip-path 1.45s cubic-bezier(.22,.58,.3,1); }
