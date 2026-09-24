@@ -233,14 +233,23 @@
   }
 
   function initReveal() {
-    const items = document.querySelectorAll(".reveal, .process-reveal, .ending-reveal");
-    if (!items.length) return;
+    const items = document.querySelectorAll(".reveal, .process-reveal");
+    const endings = document.querySelectorAll(".ending-reveal");
+    if (!items.length && !endings.length) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || !("IntersectionObserver" in window)) return items.forEach(el => el.classList.add("is-visible"));
+    if (reduced || !("IntersectionObserver" in window)) {
+      items.forEach(el => el.classList.add("is-visible"));
+      endings.forEach(el => el.classList.add("is-visible"));
+      return;
+    }
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); }
     }), { threshold: 0.12 });
     items.forEach(item => observer.observe(item));
+    const endingObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add("is-visible"); endingObserver.unobserve(entry.target); }
+    }), { threshold: 0.52 });
+    endings.forEach(ending => endingObserver.observe(ending));
   }
 
   function initTitleReveal() {
