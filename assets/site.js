@@ -146,11 +146,13 @@
   function initUnifiedEnding() {
     const main = document.querySelector("main");
     const footer = document.querySelector("[data-site-footer]");
-    if (!main || !footer || footer.closest(".page-ending,.profile-ending")) return;
+    if (!main || !footer) return;
+    const existing = footer.closest(".page-ending,.profile-ending");
+    if (existing) { existing.classList.add("ending-reveal"); return; }
     const closing = main.querySelector(":scope > .closing-cta:last-child");
     if (!closing) return;
     const ending = document.createElement("div");
-    ending.className = `page-ending page-ending--${page}`;
+    ending.className = `page-ending page-ending--${page} ending-reveal`;
     main.insertAdjacentElement("afterend", ending);
     ending.append(closing, footer);
   }
@@ -231,7 +233,7 @@
   }
 
   function initReveal() {
-    const items = document.querySelectorAll(".reveal, .process-reveal");
+    const items = document.querySelectorAll(".reveal, .process-reveal, .ending-reveal");
     if (!items.length) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced || !("IntersectionObserver" in window)) return items.forEach(el => el.classList.add("is-visible"));
