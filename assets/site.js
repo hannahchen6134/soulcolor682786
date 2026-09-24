@@ -143,6 +143,18 @@
       <section class="closing-cta closing-cta--light reveal"><p><span>這個方案符合你想留下的方式嗎？</span><span>預約後，我們會一起確認訪談時間。</span></p><a class="button button--primary" href="${bookingURL}" target="_blank" rel="noopener noreferrer">選擇${service.title}並預約</a></section>`;
   }
 
+  function initUnifiedEnding() {
+    const main = document.querySelector("main");
+    const footer = document.querySelector("[data-site-footer]");
+    if (!main || !footer || footer.closest(".page-ending,.profile-ending")) return;
+    const closing = main.querySelector(":scope > .closing-cta:last-child");
+    if (!closing) return;
+    const ending = document.createElement("div");
+    ending.className = `page-ending page-ending--${page}`;
+    main.insertAdjacentElement("afterend", ending);
+    ending.append(closing, footer);
+  }
+
   function renderWorkArtifacts() {
     document.querySelectorAll("[data-artifact]").forEach(root => {
       const title = root.dataset.artifact === "a4" ? "色彩留影" : root.dataset.artifact === "single" ? "色彩人物卡" : "色彩人物誌";
@@ -364,6 +376,7 @@
   renderHomeServices();
   renderServicesOverview();
   renderServiceDetail();
+  initUnifiedEnding();
   renderWorkArtifacts();
   initArtworkViewer();
   initSpectrumBlend();

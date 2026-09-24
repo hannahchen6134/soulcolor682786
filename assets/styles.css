@@ -535,7 +535,7 @@ body:has(.closing-cta.reveal.is-visible) .site-footer { opacity:1; clip-path:ins
 .profile-belief blockquote span { display: block; text-wrap: balance; }
 .profile-belief blockquote span + span { margin-top: 12px; }
 .profile-belief strong { color: #f3c9b6; font-weight: 500; }
-.profile-ending { position:relative; isolation:isolate; overflow:hidden; color:#fff8f1; background:linear-gradient(180deg,#7f4c45 0%,#75433d 24%,#623630 48%,#4b2925 72%,#311a18 100%); }
+.profile-ending { position:relative; isolation:isolate; overflow:hidden; color:#fff8f1; background:linear-gradient(to top,#311a18 0%,#4b2925 28%,#623630 52%,#75433d 76%,#7f4c45 100%); }
 .profile-ending::before { content:''; position:absolute; inset:-18% -12%; z-index:-1; pointer-events:none; background:radial-gradient(ellipse 48% 54% at 16% 18%,rgba(244,196,178,.18),transparent 72%),radial-gradient(ellipse 44% 58% at 88% 64%,rgba(181,127,116,.13),transparent 74%); animation:profile-ending-breathe 18s ease-in-out infinite; }
 .profile-ending .profile-belief,
 .profile-ending .closing-cta--profile,
@@ -547,6 +547,16 @@ body[data-page="profile"] .profile-ending:has(.closing-cta.reveal.is-visible) .s
 .closing-cta--profile::before { display: none; }
 .closing-cta--profile > p { max-width:520px; margin:0; }
 .closing-cta--profile .button { flex:0 0 auto; box-shadow:0 12px 28px rgba(49,24,20,.2),0 0 0 4px rgba(255,248,241,.06); }
+
+.page-ending { position:relative; isolation:isolate; overflow:hidden; color:#fff8f1; background:linear-gradient(to top,#311a18 0%,#4b2925 24%,#6f4039 49%,#9a655d 68%,#c9a096 84%,#f2ebe0 100%); }
+.page-ending--about { background:linear-gradient(to top,#311a18 0%,#442520 28%,#52302a 54%,#5a332d 78%,#573029 100%); }
+.page-ending::before { content:''; position:absolute; inset:-18% -12%; z-index:-1; pointer-events:none; background:radial-gradient(ellipse 48% 54% at 18% 20%,rgba(255,224,208,.17),transparent 72%),radial-gradient(ellipse 46% 58% at 86% 66%,rgba(190,137,126,.12),transparent 74%); animation:profile-ending-breathe 18s ease-in-out infinite; }
+.page-ending .closing-cta,
+.page-ending .site-footer { background:transparent; }
+.page-ending .closing-cta.reveal::after,
+.page-ending .site-footer::before { display:none; }
+body .page-ending .site-footer,
+body .page-ending:has(.closing-cta.reveal.is-visible) .site-footer { opacity:1; clip-path:none; transform:none; transition:none; }
 
 /* Services */
 .service-choice-guide { padding: clamp(60px,7vw,88px) var(--gutter); display: grid; grid-template-columns: minmax(230px,320px) minmax(0,1fr); gap: clamp(52px,8vw,112px); align-items: start; background: rgba(250,246,240,.84); border-bottom: 1px solid rgba(100,58,51,.16); }
