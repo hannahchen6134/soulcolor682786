@@ -548,7 +548,7 @@ body:has(.closing-cta.reveal.is-visible) .site-footer { opacity:1; clip-path:ins
 .profile-belief blockquote span { display: block; text-wrap: balance; }
 .profile-belief blockquote span + span { margin-top: 12px; }
 .profile-belief strong { color: #f3c9b6; font-weight: 500; }
-.profile-ending { --ending-gradient:linear-gradient(to top,#24131f 0%,#3b1d2e 22%,#57293b 46%,#713847 70%,#8b4d59 88%,#985d67 100%); position:relative; isolation:isolate; overflow:hidden; color:#fff8f1; background:transparent; }
+.profile-ending { --ending-gradient:linear-gradient(to top,#2f1916 0%,#3d211d 22%,#4b2924 46%,#59312b 70%,#633830 88%,#6a3d35 100%); position:relative; isolation:isolate; overflow:hidden; color:#fff8f1; background:transparent; }
 .profile-ending .profile-belief,
 .profile-ending .closing-cta--profile,
 .profile-ending .site-footer { background:transparent; }
@@ -567,7 +567,7 @@ body[data-page="profile"] .profile-ending .site-footer { clip-path:none; transit
 .profile-ending::after { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.6; background:linear-gradient(to top,rgba(255,218,201,.03) 0%,rgba(255,221,207,.1) 44%,rgba(255,238,226,0) 100%); -webkit-mask-image:linear-gradient(to top,#000 0%,#000 94%,transparent 100%); mask-image:linear-gradient(to top,#000 0%,#000 94%,transparent 100%); -webkit-mask-position:bottom; mask-position:bottom; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-size:100% 0%; mask-size:100% 0%; transition:-webkit-mask-size 2.4s linear,mask-size 2.4s linear; }
 .profile-ending::before,
 .profile-ending::after { transition-duration:2.55s; transition-timing-function:cubic-bezier(.22,.6,.32,1); }
-.profile-ending::after { opacity:.72; background:radial-gradient(ellipse 62% 46% at 18% 86%,rgba(168,91,116,.18),transparent 72%),radial-gradient(ellipse 48% 42% at 86% 26%,rgba(118,76,127,.16),transparent 74%),linear-gradient(to top,rgba(255,208,218,.035) 0%,rgba(229,182,207,.09) 52%,rgba(255,238,242,0) 100%); }
+.profile-ending::after { opacity:.62; background:radial-gradient(ellipse 62% 46% at 18% 86%,rgba(191,119,94,.13),transparent 72%),radial-gradient(ellipse 48% 42% at 86% 26%,rgba(153,91,73,.11),transparent 74%),linear-gradient(to top,rgba(255,218,201,.025) 0%,rgba(231,181,161,.075) 52%,rgba(255,238,226,0) 100%); }
 .ending-reveal.is-visible::before,
 .ending-reveal.is-visible::after { -webkit-mask-size:100% 110%; mask-size:100% 110%; }
 .page-ending .closing-cta,
