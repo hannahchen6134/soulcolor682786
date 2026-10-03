@@ -499,7 +499,14 @@ body:has(.closing-cta.reveal.is-visible) .site-footer { opacity:1; clip-path:ins
 .profile-years p { margin: 0; font-size: 12px; line-height: 1.8; color: var(--muted); }
 .profile-intro { display: grid; grid-template-columns: minmax(300px,.78fr) minmax(420px,1.22fr); gap: clamp(52px,8vw,112px); align-items: start; background: linear-gradient(180deg,#fdfaf6 0%,#faf5ee 58%,#f8f1e9 100%); }
 .profile-work-figure { max-width: 430px; margin: 0; position: sticky; top: 116px; }
-.profile-work-figure img { width:100%; aspect-ratio:3/4; object-fit:cover; object-position:50% 50%; border-radius:2px; filter:saturate(.76) contrast(.96) brightness(1.035); box-shadow:0 20px 44px rgba(68,37,32,.09); }
+.profile-work-photos { min-height:560px; position:relative; isolation:isolate; }
+.profile-work-photos::before { content:''; position:absolute; inset:7% 3% 5% 9%; border:1px solid rgba(100,58,51,.11); transform:rotate(-1.5deg); }
+.profile-work-photo { display:block; position:absolute; overflow:hidden; background:#f7eee5; border:6px solid rgba(255,252,247,.94); box-shadow:0 18px 38px rgba(68,37,32,.11); }
+.profile-work-photo img { width:100%; height:100%; display:block; object-fit:cover; filter:saturate(.76) contrast(.96) brightness(1.035); }
+.profile-work-photo--studio { width:74%; aspect-ratio:4/5; left:0; top:0; z-index:1; transform:rotate(-1.2deg); }
+.profile-work-photo--studio img { object-position:50% 50%; }
+.profile-work-photo--garden { width:48%; aspect-ratio:3/4; right:0; bottom:0; z-index:2; transform:rotate(1.4deg); }
+.profile-work-photo--garden img { object-position:50% 47%; }
 .profile-work-figure figcaption, .profile-origin-media figcaption { margin-top: 12px; font-size: 11px; line-height: 1.6; letter-spacing: .08em; color: var(--muted); }
 .profile-intro-copy h2 { margin-bottom: 18px; color: var(--wine); }
 .profile-intro-lead { max-width: 620px; margin-bottom: 30px; color: var(--muted); }
@@ -1068,6 +1075,11 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .profile-years { grid-column: auto; padding-left: 20px; }
   .profile-intro { grid-template-columns: 1fr; gap: 36px; }
   .profile-work-figure { width: min(100%,360px); max-width: none; position: static; }
+  .profile-work-photos { min-height:0; aspect-ratio:4/5; }
+  .profile-work-photos::before { inset:7% 4% 5% 8%; }
+  .profile-work-photo { border-width:4px; }
+  .profile-work-photo--studio { width:73%; }
+  .profile-work-photo--garden { width:47%; }
   .profile-work-figure figcaption { margin-top: 9px; }
   .profile-intro-lead { margin-bottom: 22px; }
   .profile-facts li { padding: 18px 0; grid-template-columns: 34px minmax(0,1fr); gap: 10px; }
