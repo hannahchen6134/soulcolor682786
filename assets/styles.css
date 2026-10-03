@@ -1116,22 +1116,23 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .service-decision { margin-top:8px; }
   .service-decision { text-align:center; }
   .service-decision .overview-pricing { width:fit-content; min-width:190px; margin:0 auto 10px; }
-  .service-decision .overview-price-main { width:fit-content; margin-inline:auto; }
+  .service-decision .overview-price-main { width:fit-content; margin-inline:auto; grid-template-columns:max-content max-content; justify-content:center; }
+  .service-decision .overview-price-main small { grid-column:1 / -1; justify-self:center; margin-top:4px; }
   .service-decision > .service-duration { text-align:center; }
   .service-decision > .button-row { margin-top:18px; align-items:stretch; flex-direction:column; }
   .service-decision .button { width:fit-content; max-width:240px; padding-inline:24px; align-self:center; }
   .service-detail-link { align-self:center; }
-  .product-stage--a4 { width: min(58%,200px); height: auto !important; margin-top:12px; margin-bottom:0; padding: 8px; }
-  .a4-callout { gap:4px; }
+  .product-stage--a4 { width:min(100%,320px); height:auto !important; margin:12px auto 0; padding:8px 0 0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:auto auto; column-gap:22px; row-gap:16px; aspect-ratio:auto; }
+  .product-stage--a4 .sample-work-image { width:min(68%,200px); grid-column:1 / -1; grid-row:1; justify-self:center; }
+  .a4-callout { width:auto; position:static; display:block; text-align:center; }
+  .a4-callout-copy { width:auto; align-items:center; gap:3px; }
   .a4-callout small { font-size:8px; letter-spacing:.08em; }
-  .a4-callout strong { font-size:13px; letter-spacing:.04em; }
-  .a4-callout svg { stroke-width:.68; }
-  .a4-callout-copy { width:70px; }
-  .a4-callout--quote { left:-58px; top:29%; }
-  .a4-callout--quote svg { width:44px; }
-  .a4-callout--angle { right:-52px; top:56%; grid-template-columns:62px 84px; column-gap:8px; }
-  .a4-callout--angle svg { width:62px; margin-top:23px; }
-  .a4-callout--angle .a4-callout-copy { width:84px; }
+  .a4-callout strong { font-size:12px; letter-spacing:.03em; white-space:normal; }
+  .a4-callout strong::after { left:18%; right:18%; }
+  .a4-callout svg { display:none; }
+  .a4-callout--quote { grid-column:1; grid-row:2; }
+  .a4-callout--angle { grid-column:2; grid-row:2; }
+  .a4-callout--angle .a4-callout-copy { width:auto; }
   .mock-paper { width: min(60%,220px); }
   .paper-shadow { width: min(49%,195px); }
   .product-stage--single .mock-paper { width: min(36%,135px); right: 11%; top: 10%; }
