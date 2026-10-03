@@ -1022,9 +1022,12 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .signature-steps h3 { font-size:16px; }
   .signature-steps p { font-size:13px; line-height:1.65; }
   .home-steps { grid-template-columns:1fr; gap:34px; }
+  .home-steps-heading h2 { font-size:18px; line-height:1.48; letter-spacing:.045em; }
   .home-steps ol { grid-template-columns:1fr; }
   .home-steps li,.home-steps li + li { min-height:0; padding:22px 0; grid-template-columns:36px minmax(0,1fr); border-left:0; }
-  .home-steps li strong { margin-bottom:6px; font-size:16px; }
+  .home-steps li > span { font-size:16px; }
+  .home-steps li strong { margin-bottom:6px; font-size:15px; line-height:1.48; }
+  .home-steps li p { font-size:12.5px; line-height:1.68; }
   .signature-swatches i { width:27px; }
   .ritual-preview { min-height: auto; padding: 0; grid-template-columns: 1fr; }
   .ritual-frame { height: 360px; margin: 0; }
@@ -1042,8 +1045,10 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .client-voices-grid blockquote:nth-child(1) { min-height:190px; padding:32px 30px; }
   .client-voices-grid blockquote p { font-size: 13px; line-height: 1.65; }
   .client-voices-grid blockquote strong { margin-bottom:10px; font-size:11px; }
-  .client-voices-grid .voice-featured strong { font-size:23px; }
-  .client-voices-grid .voice-featured p { font-size:14px; }
+  .client-voices-grid--compact .voice-featured strong { margin-bottom:14px; font-size:18px; line-height:1.52; letter-spacing:.06em; }
+  .client-voices-grid--compact .voice-featured p { font-size:12.5px; line-height:1.68; }
+  .client-voices-grid--compact blockquote:not(.voice-featured) strong { font-size:10.5px; }
+  .client-voices-grid--compact blockquote:not(.voice-featured) p { font-size:12.5px; }
   .home-faq { gap:28px; }
   .home-close .button-row { flex-direction:column; }
   .home-close, .closing-cta { min-height: 220px; padding-top: 42px; padding-bottom: 42px; }
@@ -1051,7 +1056,7 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .page-hero { min-height: 290px; padding-top: 50px; padding-bottom: 50px; place-items: center start; text-align: left; }
   .page-hero-copy { width: 100%; }
   .page-hero .lead { margin-inline: 0; }
-  .page-hero h1 { font-size: 20px; line-height: 1.38; }
+  .page-hero h1 { font-size: 19px; line-height: 1.4; }
   .about-question, .about-not-test, .brand-story { grid-template-columns: 1fr; gap: 42px; }
   .about-takeaways { grid-template-columns: 1fr; gap: 40px; }
   .about-takeaways-head { position: static; }
@@ -1069,13 +1074,15 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .closing-cta--about { min-height:210px; padding-top:40px; padding-bottom:40px; flex-direction:column; justify-content:center; text-align:center; }
   .closing-cta--about > p { margin-bottom:24px; }
   .profile-hero { min-height: auto; padding-top: 72px; padding-bottom: 82px; grid-template-columns: 1fr; gap: 58px; }
-  .profile-hero-copy h1 { font-size: 22px; line-height: 1.32; letter-spacing: .07em; }
-  .profile-hero-intro { max-width: 310px; font-size: 13.5px; line-height: 1.62; letter-spacing: .035em; }
-  .profile-hero-actions { gap:8px; }
-  .profile-action-link { padding-inline:14px; }
-  .profile-instagram { grid-template-columns:16px auto 16px; column-gap:8px; }
-  .profile-instagram-icon { width:16px; height:16px; }
-  .profile-instagram-handle { font-size:11px; letter-spacing:.025em; }
+  .profile-hero-copy h1 { font-size: 20px; line-height: 1.34; letter-spacing: .065em; }
+  .profile-hero-intro { max-width: 310px; font-size: 12.5px; line-height: 1.68; letter-spacing: .03em; }
+  .profile-hero-actions { width:100%; flex-wrap:nowrap; gap:6px; }
+  .profile-action-link { min-width:0; min-height:44px; padding:6px 8px; gap:4px; flex:0 1 auto; font-size:9px; letter-spacing:.02em; white-space:nowrap; }
+  .profile-instagram { grid-template-columns:12px auto 12px; column-gap:4px; }
+  .profile-instagram-icon { width:12px; height:12px; }
+  .profile-instagram-arrow { width:12px; height:12px; }
+  .profile-instagram-handle { font-size:9px; letter-spacing:.01em; }
+  .profile-action-link > svg:last-child { width:12px; height:12px; flex:0 0 12px; }
   .profile-paper { width:min(82%,310px); justify-self:center; padding:32px 28px; }
   .profile-portrait { width:108px; margin-top:18px; }
   .profile-paper p { margin:16px 0 7px; font-size:14px; line-height:1.5; }
@@ -1101,11 +1108,14 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .profile-facts p { font-size: 13.5px; line-height: 1.62; }
   .profile-origin-media { margin-top: 24px; grid-template-columns: minmax(0,1fr) minmax(0,.84fr); gap: 14px; }
   .profile-screen-crop { border-radius: 14px; }
-  .profile-method-intro { margin-bottom: 44px; }
+  .profile-method-intro { margin-bottom: 36px; }
+  .profile-method-intro h2 { font-size:19px; line-height:1.45; }
+  .profile-method-intro > p:last-child { font-size:13px; line-height:1.7; }
   .profile-principles { grid-template-columns: 1fr; border-top: 1px solid var(--line); }
-  .profile-principles article, .profile-principles article:first-child { min-height: 0; padding: 32px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .profile-principles article, .profile-principles article:first-child { min-height: 0; padding: 27px 0; border-right: 0; border-bottom: 1px solid var(--line); }
   .profile-principles article:last-child { border-bottom: 0; }
-  .profile-principles h3 { margin-top: 18px; }
+  .profile-principles h3 { margin:16px 0 12px; font-size:18px; line-height:1.48; }
+  .profile-principles p { font-size:13px; line-height:1.7; }
   .profile-belief { min-height: 260px; padding-top: 46px; padding-bottom: 46px; }
   .profile-belief blockquote { max-width: 520px; font-size: 15.5px; line-height: 1.5; letter-spacing: .02em; }
   .profile-belief blockquote span + span { margin-top: 8px; }
@@ -1223,7 +1233,8 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .work-format .product-stage { width: calc(100% + 20px); margin-left: -10px; }
   .works-note { padding-top: 54px; padding-bottom: 54px; text-align: left; }
   .faq-list { padding-top: 10px; }
-  .faq-list summary { min-height: 70px; font-size: 15px; }
+  .faq-list summary { min-height: 64px; padding-block:16px; font-size:14px; line-height:1.55; }
+  .faq-list summary::after { font-size:21px; }
   .faq-answer { padding-right: 0; }
   .faq-answer-list li { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
   .faq-answer-list span { font-size: 14px; line-height: 1.72; }
@@ -1249,7 +1260,7 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .client-voices-grid { grid-template-columns:1fr; }
   .client-voices-grid--compact blockquote:nth-child(1) { min-height:0; padding:28px 24px; }
   .client-voices-grid blockquote:nth-child(1) { grid-column:auto; min-height:0; padding:28px 24px; }
-  .client-voices-grid .voice-featured strong { font-size:21px; }
+  .client-voices-grid--compact .voice-featured strong { font-size:17px; }
 }
 
 @media (max-width: 374px) {
