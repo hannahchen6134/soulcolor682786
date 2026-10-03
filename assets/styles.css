@@ -1116,8 +1116,8 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .service-decision { margin-top:8px; }
   .service-decision { text-align:center; }
   .service-decision .overview-pricing { width:fit-content; min-width:190px; margin:0 auto 10px; }
-  .service-decision .overview-price-main { width:fit-content; margin-inline:auto; grid-template-columns:max-content max-content; justify-content:center; }
-  .service-decision .overview-price-main small { grid-column:1 / -1; justify-self:center; margin-top:4px; }
+  .service-decision .overview-price-main { width:fit-content; margin-inline:auto; grid-template-columns:max-content max-content max-content; justify-content:center; align-items:baseline; column-gap:10px; }
+  .service-decision .overview-price-main small { grid-column:auto; justify-self:start; margin:0 0 0 2px; font-size:10px; white-space:nowrap; }
   .service-decision > .service-duration { text-align:center; }
   .service-decision > .button-row { margin-top:18px; align-items:stretch; flex-direction:column; }
   .service-decision .button { width:fit-content; max-width:240px; padding-inline:24px; align-self:center; }
