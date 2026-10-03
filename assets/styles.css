@@ -216,13 +216,7 @@ body[data-page="home"] .home-hero::after { content:''; position:absolute; inset:
 .home-intro-copy > p:first-child { margin-bottom:18px; color:var(--muted); }
 .home-intro-emphasis { max-width:590px; margin-bottom:28px; padding:18px 0 18px 24px; border-left:2px solid var(--terracotta); font-size:clamp(19px,2vw,27px); font-weight:500; line-height:1.65; color:var(--wine-deep); }
 .home-steps { display:grid; grid-template-columns:minmax(220px,.55fr) minmax(560px,1.45fr); gap:clamp(56px,8vw,112px); align-items:start; background:#f8f2ea; }
-.home-steps-heading h2 { margin:0 0 16px; color:var(--wine); }
-.home-steps-heading p { max-width:320px; margin:0; color:var(--muted); }
-.home-steps-exchange { max-width:330px; margin:28px 0 0; display:grid; border-top:1px solid rgba(100,58,51,.18); border-bottom:1px solid rgba(100,58,51,.18); }
-.home-steps-exchange > div { padding:10px 0; display:grid; grid-template-columns:82px minmax(0,1fr); gap:12px; align-items:baseline; }
-.home-steps-exchange > div + div { border-top:1px solid rgba(100,58,51,.1); }
-.home-steps-exchange dt { font-size:10px; letter-spacing:.12em; color:var(--terracotta); }
-.home-steps-exchange dd { margin:0; font-size:12px; line-height:1.62; letter-spacing:.035em; color:var(--wine-deep); }
+.home-steps-heading h2 { margin:0; color:var(--wine); }
 .home-steps ol { margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); list-style:none; border-top:1px solid rgba(100,58,51,.22); }
 .home-steps li { min-height:190px; padding:28px clamp(18px,2.2vw,34px) 26px 0; display:grid; grid-template-columns:38px minmax(0,1fr); gap:14px; border-bottom:1px solid rgba(100,58,51,.18); }
 .home-steps li + li { padding-left:clamp(18px,2.2vw,34px); border-left:1px solid rgba(100,58,51,.14); }
@@ -982,7 +976,7 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .section-pad { padding-top: 56px; padding-bottom: 56px; }
   .button { min-height: 50px; max-width: 260px; font-size: 11.8px; }
   .text-link { min-height: 50px; font-size: 11.8px; }
-  .home-hero { min-height: auto; padding-top: 48px; padding-bottom: 64px; grid-template-columns: 1fr; gap: 36px; background:radial-gradient(ellipse 78% 34% at 12% 10%,rgba(216,151,132,.1),transparent 72%),radial-gradient(ellipse 72% 38% at 91% 42%,rgba(226,190,133,.08),transparent 74%),linear-gradient(158deg,#fbf7f1 0%,#f7efe6 54%,#faf5ed 100%); }
+  .home-hero { min-height: auto; padding-top: 48px; padding-bottom: 64px; grid-template-columns: 1fr; gap: 20px; background:radial-gradient(ellipse 78% 34% at 12% 10%,rgba(216,151,132,.1),transparent 72%),radial-gradient(ellipse 72% 38% at 91% 42%,rgba(226,190,133,.08),transparent 74%),linear-gradient(158deg,#fbf7f1 0%,#f7efe6 54%,#faf5ed 100%); }
   body[data-page="home"] .home-hero::after { opacity:.62; }
   body[data-page="home"] .home-hero::before { display:none; }
   body[data-page="home"] .home-hero .light-field { top:52%; bottom:-1px; -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.35) 13%,#000 28%); mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.35) 13%,#000 28%); }
@@ -1007,7 +1001,7 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .luminous-palette i { width: 22px; height: 22px; }
   .hero-prompt > .paper-curl { width: 44px; height: 44px; }
   .hero-output { width:min(88%,320px); padding:0; }
-  .hero-output-stack { margin-top:0; }
+  .hero-output-stack { aspect-ratio:1/.72; margin-top:0; }
   .hero-output-stack img,.hero-output-blank { width:58%; }
   .hero-output-aiqi { width:56%; left:0; }
   .hero-output-tony { left:25%; }
@@ -1028,8 +1022,6 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .signature-steps h3 { font-size:16px; }
   .signature-steps p { font-size:13px; line-height:1.65; }
   .home-steps { grid-template-columns:1fr; gap:34px; }
-  .home-steps-heading p { max-width:300px; }
-  .home-steps-exchange { max-width:100%; margin-top:24px; }
   .home-steps ol { grid-template-columns:1fr; }
   .home-steps li,.home-steps li + li { min-height:0; padding:22px 0; grid-template-columns:36px minmax(0,1fr); border-left:0; }
   .home-steps li strong { margin-bottom:6px; font-size:16px; }
