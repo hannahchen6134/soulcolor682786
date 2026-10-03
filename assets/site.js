@@ -6,8 +6,8 @@
   const config = window.SOUL_COLOR_CONFIG;
   const page = document.body.dataset.page || "home";
   const navItems = [
-    ["about", "服務理念", "about.html"],
-    ["profile", "關於我", "profile.html"],
+    ["about", "認識人物調色盤", "about.html"],
+    ["profile", "認識青青", "profile.html"],
     ["services", "方案與價格", "services.html"],
     ["faq", "常見問題", "faq.html"]
   ];
@@ -47,15 +47,15 @@
     const price = service.prices;
     if (!price) return "";
     return `<div class="service-pricing" aria-label="${service.title}價格">
-      <p class="price-featured"><span>體驗價</span><strong>NT$ ${price.trial}</strong><small>${price.trialNote}</small></p>
-      <div class="price-notes"><p><span>原價</span><strong>NT$ ${price.original}</strong></p><p><span>早鳥價</span><strong>NT$ ${price.early}</strong><small>${price.earlyNote}</small></p></div>
+      <p class="price-featured"><span>體驗價</span><strong>NT$ ${price.trial}</strong><small>限額 10 位</small></p>
+      <div class="price-notes"><p><span>早鳥價</span><strong>NT$ ${price.early}</strong><small>${price.earlyNote}</small></p><p><span>原價</span><strong>NT$ ${price.original}</strong></p></div>
     </div>`;
   }
 
   function overviewPriceMarkup(service) {
     const price = service.prices;
     if (!price) return "";
-    return `<div class="overview-pricing" aria-label="${service.title}體驗價格"><p class="overview-price-main"><span>體驗價</span><strong>NT$ ${price.trial}</strong><small>${price.trialNote}</small></p></div>`;
+    return `<div class="overview-pricing" aria-label="${service.title}價格"><p class="overview-price-main"><span>體驗價</span><strong>NT$ ${price.trial}</strong><small>限額 10 位｜早鳥 NT$ ${price.early}（${price.earlyNote}）</small></p></div>`;
   }
 
   function deliverablesMarkup(items) {
@@ -68,10 +68,10 @@
   function initShell() {
     const header = document.querySelector("[data-site-header]");
     if (header) {
-      header.innerHTML = `<a class="brand" href="index.html" aria-label="Soul Color 首頁"><span>SOUL COLOR</span><small>PERSON PALETTE</small></a><nav class="desktop-nav" aria-label="主要導覽">${navItems.map(([key,label,href]) => `<a ${page === key ? 'aria-current="page"' : ""} href="${href}">${label}</a>`).join("")}</nav><a class="nav-order" href="services.html#choice-guide-title">選擇方案並預約</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span><b class="sr-only">開啟選單</b></button><div class="mobile-menu" id="mobileMenu" hidden>${navItems.map(([key,label,href]) => `<a ${page === key ? 'aria-current="page"' : ""} href="${href}">${label}</a>`).join("")}<a class="button button--primary" href="services.html#choice-guide-title">選擇方案並預約</a></div>`;
+      header.innerHTML = `<a class="brand" href="index.html" aria-label="Soul Color 首頁"><span>SOUL COLOR</span><small>PERSON PALETTE</small></a><nav class="desktop-nav" aria-label="主要導覽">${navItems.map(([key,label,href]) => `<a ${page === key ? 'aria-current="page"' : ""} href="${href}">${label}</a>`).join("")}</nav><a class="nav-order" href="services.html">瞭解方案與預約</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span><b class="sr-only">開啟選單</b></button><div class="mobile-menu" id="mobileMenu" hidden>${navItems.map(([key,label,href]) => `<a ${page === key ? 'aria-current="page"' : ""} href="${href}">${label}</a>`).join("")}<a class="button button--primary" href="services.html">瞭解方案與預約</a></div>`;
     }
     const footer = document.querySelector("[data-site-footer]");
-    if (footer) footer.innerHTML = `<div class="footer-brand"><span>SOUL COLOR</span></div><nav aria-label="頁尾導覽"><a href="about.html">服務理念</a><a href="profile.html">關於我</a><a href="services.html">方案與價格</a><a href="faq.html">常見問題</a></nav><small>© ${new Date().getFullYear()} Soul Color</small>`;
+    if (footer) footer.innerHTML = `<nav aria-label="頁尾導覽"><a href="about.html">認識人物調色盤</a><a href="profile.html">認識青青</a><a href="services.html">方案與價格</a><a href="faq.html">常見問題</a></nav><small>© ${new Date().getFullYear()} Soul Color</small>`;
     document.querySelectorAll(".order-link").forEach(link => {
       link.href = config.orderURL;
       link.target = "_blank";
@@ -119,7 +119,7 @@
       : `<a class="service-visual" href="service-${slug}.html" aria-label="查看${service.title}作品與方案詳情">${mockupMarkup(service.mockup, service.title)}</a>`;
     root.innerHTML = Object.entries(config.services).map(([slug, service], index) => `
       <article class="service-row service-row--${slug} ${index % 2 ? "service-row--reverse" : ""} reveal" id="service-${slug}">
-        <div class="service-copy"><div class="service-heading"><span class="section-number">${service.number}</span><p class="service-purpose">${service.purpose}</p></div><h2>${service.title}</h2><p class="service-positioning">${service.positioning}</p></div>
+        <div class="service-copy"><h2>${service.title}</h2><p class="service-positioning">${service.positioning}</p></div>
         ${overviewVisual(slug, service)}
         <div class="service-decision">${overviewPriceMarkup(service)}<p class="service-duration">${service.duration}</p><div class="button-row"><a class="button button--primary" href="${orderUrl(service)}" target="_blank" rel="noopener noreferrer">預約${service.title}</a><a class="service-detail-link" href="service-${slug}.html">查看完整方案內容 <span aria-hidden="true">→</span></a></div></div>
       </article>`).join("");
@@ -143,12 +143,12 @@
     const service = config.services[slug];
     const bookingURL = orderUrl(service);
     const sticky = document.querySelector(".mobile-sticky");
-    if (sticky) { sticky.href = bookingURL; sticky.textContent = `選擇${service.title}並預約`; }
+    if (sticky) { sticky.href = bookingURL; sticky.textContent = `預約${service.title}`; }
     root.innerHTML = `
-      <section class="detail-hero page-hero"><div class="page-light-field" aria-hidden="true"></div><div class="detail-hero-copy"><p class="eyebrow">SERVICE ${service.number}</p><h1>${service.title}</h1><p class="lead">${service.positioning}</p>${priceMarkup(service)}<p class="service-duration">${service.duration}</p><p class="service-logistics"><span>線上訪談</span><span>訪談後約 5 天內交付電子檔</span><span>成品最多可修改兩次哦</span></p><a class="button button--primary" href="${bookingURL}" target="_blank" rel="noopener noreferrer">選擇${service.title}並預約</a></div><div class="detail-hero-visual">${mockupMarkup(service.mockup, service.title)}</div></section>
-      <section class="detail-fit section-pad reveal"><div><p class="eyebrow">FOR YOU</p><h2>這個方案<br>適合現在的你嗎？</h2></div><ul>${service.fit.map(item => `<li>${item}</li>`).join("")}</ul></section>
-      <section class="detail-deliver section-pad reveal"><div class="deliver-copy"><p class="eyebrow">YOU WILL RECEIVE</p><h2>你會得到</h2><ul>${deliverablesMarkup(service.deliverables)}</ul><p class="note">色彩不是人格答案。成品記錄的是這一次相遇裡，我們一起看見的角度。</p><a class="text-link detail-faq-link" href="faq.html">有其他問題？前往 FAQ <span>↗</span></a></div><div>${mockupMarkup(service.mockup, service.title)}</div></section>
-      <section class="closing-cta closing-cta--light reveal"><p><span>這個方案符合你想留下的方式嗎？</span><span>預約後，我們會一起確認訪談時間。</span></p><a class="button button--primary" href="${bookingURL}" target="_blank" rel="noopener noreferrer">選擇${service.title}並預約</a></section>`;
+      <section class="detail-hero page-hero"><div class="page-light-field" aria-hidden="true"></div><div class="detail-hero-copy"><p class="eyebrow">方案 ${service.number}</p><h1>${service.title}</h1>${priceMarkup(service)}<p class="service-duration">${service.duration}</p><a class="button button--primary" href="${bookingURL}" target="_blank" rel="noopener noreferrer">預約${service.title}</a></div><div class="detail-hero-visual">${mockupMarkup(service.mockup, service.title)}</div></section>
+      <section class="detail-fit section-pad reveal"><div><h2>適合誰</h2><p class="detail-section-intro">${service.positioning}</p></div><ul>${service.fit.map(item => `<li>${item}</li>`).join("")}</ul></section>
+      <section class="detail-deliver detail-deliver--compact section-pad reveal"><div class="deliver-copy"><h2>你會得到什麼</h2><ul>${deliverablesMarkup(service.deliverables)}</ul><p class="note">色彩不是人格答案。成品記錄的是這一次相遇裡，我們一起看見的角度。</p><a class="text-link detail-faq-link" href="faq.html">有其他問題？看常見問題 <span>↗</span></a></div></section>
+      <section class="detail-process section-pad reveal"><div class="section-heading"><h2>製作流程</h2></div><ol><li><span>01</span><div><strong>完成預約</strong><p>選擇方案後，我們會確認訪談時間與進行方式。</p></div></li><li><span>02</span><div><strong>直覺選色</strong><p>從當下有感覺的色彩開始，不需要準備色彩知識。</p></div></li><li><span>03</span><div><strong>線上訪談</strong><p>${service.duration.split("（")[0]}，聊聊你的故事、感受與想法。</p></div></li><li><span>04</span><div><strong>編輯與交付</strong><p>訪談後約 5 天內交付電子檔，成品最多可修改兩次。</p></div></li></ol></section>`;
   }
 
   function initUnifiedEnding() {
