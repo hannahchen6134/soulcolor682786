@@ -27,7 +27,7 @@
     <text x="80" y="424" font-size="18" letter-spacing="1.5" opacity=".76">色彩 × 訪談・一種訪談，三種呈現</text>
   </g>
   <g filter="url(#soft-shadow)">
-    <image href="../media/about-color-story-cards.png" x="585" y="178" width="590" height="265" preserveAspectRatio="xMidYMid meet"/>
+    <image href="../media/about-color-story-cards.png" x="520" y="160" width="660" height="297" preserveAspectRatio="xMidYMid meet"/>
   </g>
   <text x="1118" y="572" text-anchor="end" fill="#76554c" font-family="Georgia,serif" font-size="13" letter-spacing="3" opacity=".7">COLOR OPENS A CONVERSATION</text>
 </svg>
