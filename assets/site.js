@@ -103,11 +103,16 @@
     const root = document.querySelector("[data-services-overview]");
     if (!root) return;
     const caseLinks = {
-      "person-card": "https://www.instagram.com/p/DcOTkRmzOZH/?igsi=eWtncXRreW00d2Jv",
-      "person-story": "https://www.instagram.com/p/DcbF-NKE7SI/?igsi=MWFpaDB2b295OW96bQ=="
+      "person-card": [
+        ["查看詳細訪談", "https://www.instagram.com/p/DcOTkRmzOZH/?igsi=eWtncXRreW00d2Jv"],
+        ["Tony IG", "https://www.instagram.com/mickey801491?stkn=bjd2YXhqeWhsYmps"],
+        ["Tony的旅館「千彩格」", "https://maps.app.goo.gl/hnhtBggicSedYrSUA"]
+      ],
+      "person-story": [["查看詳細訪談", "https://www.instagram.com/p/DcbF-NKE7SI/?igsi=MWFpaDB2b295OW96bQ=="]]
     };
+    const caseLinksMarkup = (slug, service) => `<nav class="service-case-links" aria-label="${service.title}相關連結">${caseLinks[slug].map(([label, href], index) => `<a class="story-case-link${index === 2 ? " story-case-link--wide" : ""}" href="${href}" target="_blank" rel="noopener noreferrer">${label}<span aria-hidden="true">↗</span></a>`).join("")}</nav>`;
     const overviewVisual = (slug, service) => caseLinks[slug]
-      ? `<div class="service-visual service-visual--artwork" aria-label="${service.title}作品預覽">${mockupMarkup(service.mockup, service.title)}<a class="story-case-link" href="${caseLinks[slug]}" target="_blank" rel="noopener noreferrer">查看詳細訪談<span aria-hidden="true">↗</span></a></div>`
+      ? `<div class="service-visual service-visual--artwork" aria-label="${service.title}作品預覽">${mockupMarkup(service.mockup, service.title)}${caseLinksMarkup(slug, service)}</div>`
       : `<a class="service-visual" href="service-${slug}.html" aria-label="查看${service.title}作品與方案詳情">${mockupMarkup(service.mockup, service.title)}</a>`;
     root.innerHTML = Object.entries(config.services).map(([slug, service], index) => `
       <article class="service-row service-row--${slug} ${index % 2 ? "service-row--reverse" : ""} reveal" id="service-${slug}">
