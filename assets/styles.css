@@ -1005,7 +1005,7 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .luminous-palette { gap: 8px; }
   .luminous-palette i { width: 22px; height: 22px; }
   .hero-prompt > .paper-curl { width: 44px; height: 44px; }
-  .hero-output { width:min(88%,320px); margin-top:-18px; padding:0; }
+  .hero-output { width:min(88%,320px); margin-top:-6px; padding:0; }
   .hero-output-stack { aspect-ratio:1/.72; margin-top:0; }
   .hero-output-stack img,.hero-output-blank { width:58%; }
   .hero-output-aiqi { width:56%; left:0; }
