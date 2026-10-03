@@ -5,6 +5,50 @@
   document.head.appendChild(favicon);
   const config = window.SOUL_COLOR_CONFIG;
   const page = document.body.dataset.page || "home";
+  function initStarCursor() {
+    if (!window.matchMedia("(any-hover: hover) and (any-pointer: fine)").matches) return;
+
+    const style = document.createElement("style");
+    style.textContent = `
+      @media (any-hover: hover) and (any-pointer: fine) {
+        html, body, body * { cursor: none !important; }
+        input, textarea, [contenteditable="true"], [contenteditable=""] { cursor: text !important; }
+        .soul-star-cursor { position: fixed; z-index: 10000; top: 0; left: 0; width: 16px; height: 16px; pointer-events: none; opacity: 0; color: #9b817b; transform: translate3d(-50%, -50%, 0) scale(.92); transition: opacity .22s ease, filter .25s ease, scale .25s ease; filter: drop-shadow(0 0 2px rgba(250, 222, 187, .82)) drop-shadow(0 0 5px rgba(164, 93, 72, .5)) drop-shadow(0 0 9px rgba(164, 93, 72, .24)); }
+        .soul-star-cursor.is-visible { opacity: .96; animation: soul-star-twinkle 3.2s ease-in-out infinite; }
+        .soul-star-cursor.is-action { filter: drop-shadow(0 0 2px rgba(250, 222, 187, .9)) drop-shadow(0 0 6px rgba(164, 93, 72, .62)) drop-shadow(0 0 10px rgba(164, 93, 72, .3)); scale: 1.06; }
+        .soul-star-cursor svg { display: block; width: 100%; height: 100%; overflow: visible; }
+        @keyframes soul-star-twinkle { 0%, 100% { opacity: .82; transform: translate3d(-50%, -50%, 0) scale(.88) rotate(-2deg); } 50% { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(1) rotate(2deg); } }
+      }
+      @media (prefers-reduced-motion: reduce) { .soul-star-cursor.is-visible { animation: none; opacity: .86; transform: translate3d(-50%, -50%, 0) scale(.9); } }
+    `;
+    document.head.appendChild(style);
+
+    const cursor = document.createElement("span");
+    cursor.className = "soul-star-cursor";
+    cursor.setAttribute("aria-hidden", "true");
+    cursor.innerHTML = '<svg viewBox="0 0 24 24" fill="none"><defs><radialGradient id="soul-star-fill" cx="50%" cy="44%" r="62%"><stop offset="0%" stop-color="#c99d8f"/><stop offset="38%" stop-color="#9f7c75"/><stop offset="100%" stop-color="#846d69"/></radialGradient></defs><path d="M12 0.7C13.5 7 17 10.5 23.3 12 17 13.5 13.5 17 12 23.3 10.5 17 7 13.5 0.7 12 7 10.5 10.5 7 12 0.7Z" fill="url(#soul-star-fill)" stroke="#fff0d9" stroke-opacity=".76" stroke-width=".5" stroke-linejoin="round"/><circle cx="12" cy="12" r="1.05" fill="#ffebd0"/></svg>';
+    document.body.appendChild(cursor);
+
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+    document.addEventListener("pointermove", event => {
+      x = event.clientX;
+      y = event.clientY;
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        cursor.style.left = `${x}px`;
+        cursor.style.top = `${y}px`;
+        cursor.classList.add("is-visible");
+        frame = 0;
+      });
+    }, { passive: true });
+    document.addEventListener("pointerover", event => {
+      cursor.classList.toggle("is-action", Boolean(event.target.closest("a, button, summary, [role=button], [data-artwork-gallery]")));
+    }, { passive: true });
+    document.documentElement.addEventListener("pointerleave", () => cursor.classList.remove("is-visible"));
+    document.documentElement.addEventListener("pointerenter", () => cursor.classList.add("is-visible"));
+  }
   const navItems = [
     ["about", "認識人物調色盤", "about.html"],
     ["profile", "認識青青", "profile.html"],
@@ -418,6 +462,7 @@
     });
   }
 
+  initStarCursor();
   initShell();
   initMenu();
   renderHomeServices();
