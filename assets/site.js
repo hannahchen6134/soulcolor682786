@@ -108,7 +108,10 @@
         ["Tony IG", "https://www.instagram.com/mickey801491?stkn=bjd2YXhqeWhsYmps"],
         ["Tony的旅館「千彩格」", "https://maps.app.goo.gl/hnhtBggicSedYrSUA"]
       ],
-      "person-story": [["查看詳細訪談", "https://www.instagram.com/p/DcbF-NKE7SI/?igsi=MWFpaDB2b295OW96bQ=="]]
+      "person-story": [
+        ["查看詳細訪談", "https://www.instagram.com/p/DcbF-NKE7SI/?igsi=MWFpaDB2b295OW96bQ=="],
+        ["矮琦 IG", "https://www.instagram.com/ichigrowup?stkn=ajY0NWJtMnlzZHA4"]
+      ]
     };
     const caseLinksMarkup = (slug, service) => `<nav class="service-case-links" aria-label="${service.title}相關連結">${caseLinks[slug].map(([label, href], index) => `<a class="story-case-link${index === 2 ? " story-case-link--wide" : ""}" href="${href}" target="_blank" rel="noopener noreferrer">${label}<span aria-hidden="true">↗</span></a>`).join("")}</nav>`;
     const overviewVisual = (slug, service) => caseLinks[slug]
