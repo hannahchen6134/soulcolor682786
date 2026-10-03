@@ -588,6 +588,7 @@ body .profile-ending .site-footer { opacity:0; clip-path:none; transform:transla
 .ending-reveal.is-visible .closing-cta.reveal > * { animation:ending-content-in .58s 1.82s ease forwards; }
 .profile-ending.ending-reveal.is-visible .profile-belief > .eyebrow { animation:ending-content-in .62s 2.06s var(--ease) forwards; }
 .profile-ending.ending-reveal.is-visible .profile-belief > blockquote { animation:ending-content-in .72s 2.24s var(--ease) forwards; }
+.profile-ending.ending-reveal.is-visible::after { animation:profile-ending-breathe 10s 2.55s ease-in-out infinite; }
 
 /* Services */
 .service-choice-guide { padding: clamp(60px,7vw,88px) var(--gutter); display: grid; grid-template-columns: minmax(230px,320px) minmax(0,1fr); gap: clamp(52px,8vw,112px); align-items: start; background: rgba(250,246,240,.84); border-bottom: 1px solid rgba(100,58,51,.16); }
