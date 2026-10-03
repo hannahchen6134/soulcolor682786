@@ -330,6 +330,7 @@ body[data-page="home"] .client-voices { box-shadow: inset 0 1px rgba(100,58,51,.
 .home-hero .light-field.has-spectrum-canvas i,
 .page-spectrum-field.has-spectrum-canvas i { display: none; }
 .spectrum-canvas { width: 100%; height: 100%; position: absolute; inset: 0; z-index: 1; display: block; opacity: .98; mix-blend-mode: multiply; }
+.home-hero .spectrum-canvas, .page-spectrum-field .spectrum-canvas { mix-blend-mode: normal; filter: saturate(1.12); }
 .page-spectrum-field i { --field-delay: 0s; position: absolute; z-index: 1; aspect-ratio: 1; border-radius: 50%; filter: blur(78px); opacity: 0; animation-name: glow-arrive,field-glow-breathe; animation-duration: 3.8s,20s; animation-timing-function: cubic-bezier(.22,.58,.3,1),ease-in-out; animation-delay: var(--field-delay),calc(var(--field-delay) + 3.8s); animation-iteration-count: 1,infinite; animation-fill-mode: forwards,both; }
 .page-spectrum-field i:nth-child(1) { width: 55%; top: -10%; left: -8%; background: radial-gradient(circle,#e0f4e8cc 0%,#c0d8d066 60%,transparent 100%); }
 .page-spectrum-field i:nth-child(2) { --field-delay: .35s; width: 45%; top: 5%; left: 55%; background: radial-gradient(circle,#ffb89ecc 0%,#ffa08066 60%,transparent 100%); }
@@ -585,7 +586,7 @@ body .profile-ending .site-footer { opacity:0; clip-path:none; transform:transla
 .profile-ending.ending-reveal.is-visible::after { animation:profile-ending-breathe 10s 2.55s ease-in-out infinite; }
 
 /* Services */
-.service-choice-guide { padding: clamp(60px,7vw,88px) var(--gutter); display: grid; grid-template-columns: minmax(230px,320px) minmax(0,1fr); gap: clamp(52px,8vw,112px); align-items: start; background:radial-gradient(ellipse 76% 74% at 7% 4%,rgba(222,163,171,.2),transparent 74%),radial-gradient(ellipse 68% 82% at 96% 82%,rgba(157,185,174,.19),transparent 76%),radial-gradient(ellipse 58% 62% at 50% 100%,rgba(228,194,133,.14),transparent 74%),var(--quiet-paper); }
+.service-choice-guide { padding: clamp(60px,7vw,88px) var(--gutter); display: grid; grid-template-columns: minmax(230px,320px) minmax(0,1fr); gap: clamp(52px,8vw,112px); align-items: start; background:radial-gradient(ellipse 76% 74% at 7% 4%,rgba(222,142,157,.3),transparent 74%),radial-gradient(ellipse 68% 82% at 96% 82%,rgba(132,174,158,.28),transparent 76%),radial-gradient(ellipse 58% 62% at 50% 100%,rgba(226,183,104,.22),transparent 74%),var(--quiet-paper); }
 .choice-guide-heading .eyebrow { margin: 0 0 10px; }
 .choice-guide-heading h1,.choice-guide-heading h2 { margin:0; font-size:clamp(24px,2.4vw,34px); line-height:1.45; color:var(--wine-deep); }
 .choice-guide-heading > p:last-child { margin: 0; font-size: 13px; line-height: 1.85; color: var(--muted); }
@@ -985,7 +986,7 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .section-pad { padding-top:56px; padding-bottom:56px; }
   .button { min-height:46px; max-width:260px; font-size:11.5px; }
   .text-link { min-height:46px; font-size:11.5px; }
-  .home-hero { min-height: auto; padding-top: 48px; padding-bottom: 28px; grid-template-columns: 1fr; gap: 0; background:radial-gradient(ellipse 78% 34% at 12% 10%,rgba(216,151,132,.1),transparent 72%),radial-gradient(ellipse 72% 38% at 91% 42%,rgba(226,190,133,.08),transparent 74%),linear-gradient(158deg,#fbf7f1 0%,#f7efe6 54%,#f8f2ea 100%); }
+  .home-hero { min-height: auto; padding-top: 48px; padding-bottom: 28px; grid-template-columns: 1fr; gap: 0; background:radial-gradient(ellipse 78% 34% at 12% 10%,rgba(216,151,132,.14),transparent 72%),radial-gradient(ellipse 72% 38% at 91% 42%,rgba(226,190,133,.11),transparent 74%),linear-gradient(158deg,#fbf7f1 0%,#f7efe6 54%,#f8f2ea 100%); }
   body[data-page="home"] .home-hero::after { opacity:.62; }
   body[data-page="home"] .home-hero::before { display:none; }
   body[data-page="home"] .home-hero .light-field { top:0; bottom:0; -webkit-mask-image:linear-gradient(to bottom,transparent 0%,transparent 27%,rgba(0,0,0,.1) 39%,rgba(0,0,0,.34) 56%,rgba(0,0,0,.76) 76%,#000 86%,rgba(0,0,0,.62) 94%,transparent 100%); mask-image:linear-gradient(to bottom,transparent 0%,transparent 27%,rgba(0,0,0,.1) 39%,rgba(0,0,0,.34) 56%,rgba(0,0,0,.76) 76%,#000 86%,rgba(0,0,0,.62) 94%,transparent 100%); }

@@ -317,9 +317,15 @@
     ];
 
     const easeInOut = value => value * value * (3 - 2 * value);
+    const homeColors = [
+      { ...colors[0], x: .04, y: .64, radius: .42, dx: .014, dy: .012 },
+      { ...colors[1], x: .47, y: .94, radius: .36, dx: -.012, dy: .01 },
+      { ...colors[3], x: .96, y: .64, radius: .42, dx: -.014, dy: -.012 }
+    ];
 
     fields.forEach((field, fieldIndex) => {
       const isHomeField = field.matches(".home-hero .light-field");
+      const activeColors = isHomeField ? homeColors : colors;
       const canvas = document.createElement("canvas");
       canvas.className = "spectrum-canvas";
       canvas.setAttribute("aria-hidden", "true");
@@ -352,7 +358,7 @@
         context.clearRect(0, 0, width, height);
         context.globalCompositeOperation = "source-over";
 
-        colors.forEach((color, index) => {
+        activeColors.forEach((color, index) => {
           const arrival = finalState ? 1 : easeInOut(Math.min(1, Math.max(0, (elapsed - color.delay) / 2100)));
           if (arrival <= 0) return;
           const phase = (now / 1000 / color.period) * Math.PI * 2 + index * .84 + fieldIndex * .45;
@@ -361,7 +367,7 @@
           const breathe = 1 + Math.sin(phase * .72) * .028;
           const radius = Math.max(width, height) * color.radius * breathe;
           const [r, g, b] = color.rgb;
-          const strength = (isHomeField ? .46 : .40) * arrival;
+          const strength = (isHomeField ? .56 : .47) * arrival;
           const gradient = context.createRadialGradient(x, y, 0, x, y, radius);
           gradient.addColorStop(0, `rgba(${r},${g},${b},${strength})`);
           gradient.addColorStop(.24, `rgba(${r},${g},${b},${strength * .82})`);
