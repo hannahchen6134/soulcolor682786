@@ -1334,8 +1334,8 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .detail-process li strong { font-size: 14px; }
   .site-footer { grid-template-columns:1fr; padding:30px var(--gutter) calc(28px + env(safe-area-inset-bottom)); gap:16px; }
   .footer-brand span { font-size: 7px; letter-spacing: .26em; opacity: .4; }
-  .site-footer nav { grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 22px; }
-  .site-footer nav a { min-height:40px; }
+  .site-footer nav { width:100%; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 22px; }
+  .site-footer nav a { min-height:44px; }
 }
 
 @media (max-width: 480px) {
