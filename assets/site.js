@@ -191,13 +191,14 @@
     const slug = document.body.dataset.service;
     const service = config.services[slug];
     const bookingURL = orderUrl(service);
+    const deliveryTimeline = slug === "person-story" ? "訪談後 7 天內交付電子檔" : "訪談後約 5 天內交付電子檔";
     const sticky = document.querySelector(".mobile-sticky");
     if (sticky) { sticky.href = bookingURL; sticky.textContent = `預約${service.title}`; }
     root.innerHTML = `
       <section class="detail-hero page-hero"><div class="page-light-field" aria-hidden="true"></div><div class="detail-hero-copy"><p class="eyebrow">方案 ${service.number}</p><h1>${service.title}</h1>${priceMarkup(service)}<p class="service-duration">${service.duration}</p><a class="button button--primary" href="${bookingURL}" target="_blank" rel="noopener noreferrer">預約${service.title}</a></div><div class="detail-hero-visual">${mockupMarkup(service.mockup, service.title)}</div></section>
       <section class="detail-fit section-pad reveal"><div><h2>適合誰</h2><p class="detail-section-intro">${service.positioning}</p></div><ul>${service.fit.map(item => `<li>${item}</li>`).join("")}</ul></section>
       <section class="detail-deliver detail-deliver--compact section-pad reveal"><div class="deliver-copy"><h2>你會得到什麼</h2><ul>${deliverablesMarkup(service.deliverables)}</ul><p class="note">色彩不是人格答案。成品記錄的是這一次相遇裡，我們一起看見的角度。</p><a class="text-link detail-faq-link" href="faq.html">有其他問題？看常見問題 <span>↗</span></a></div></section>
-      <section class="detail-process section-pad reveal"><div class="section-heading"><h2>製作流程</h2></div><ol><li><span>01</span><div><strong>完成預約</strong><p>選擇方案後，我們會確認訪談時間與進行方式。</p></div></li><li><span>02</span><div><strong>直覺選色</strong><p>從當下有感覺的色彩開始，不需要準備色彩知識。</p></div></li><li><span>03</span><div><strong>線上訪談</strong><p>${service.duration.split("（")[0]}，聊聊你的故事、感受與想法。</p></div></li><li><span>04</span><div><strong>編輯與交付</strong><p>訪談後約 5 天內交付電子檔，成品最多可修改兩次。</p></div></li></ol></section>`;
+      <section class="detail-process section-pad reveal"><div class="section-heading"><h2>製作流程</h2></div><ol><li><span>01</span><div><strong>完成預約</strong><p>選擇方案後，我們會確認訪談時間與進行方式。</p></div></li><li><span>02</span><div><strong>直覺選色</strong><p>從當下有感覺的色彩開始，不需要準備色彩知識。</p></div></li><li><span>03</span><div><strong>線上訪談</strong><p>${service.duration.split("（")[0]}，聊聊你的故事、感受與想法。</p></div></li><li><span>04</span><div><strong>編輯與交付</strong><p>${deliveryTimeline}，成品最多可修改兩次。</p></div></li></ol></section>`;
   }
 
   function initUnifiedEnding() {
