@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1370" viewBox="0 0 1200 1370" role="img" aria-labelledby="title desc">
+  <title id="title">人物調色盤｜三種方案一眼比較</title>
+  <desc id="desc">對照三種方案的適合對象、作品內容、訪談時間與體驗價，並列出四個服務步驟。</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fcf8f2"/><stop offset="1" stop-color="#f3e8dc"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#bd7b73"/><stop offset=".5" stop-color="#d7b37f"/><stop offset="1" stop-color="#809d8d"/></linearGradient>
+    <style>
+      text{font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;fill:#49302b}
+      .eyebrow{font-size:17px;letter-spacing:7px;fill:#9b665c}
+      .title{font-size:48px;letter-spacing:5px}
+      .sub{font-size:21px;fill:#806c61;letter-spacing:1px}
+      .coltitle{font-size:30px;font-weight:700;letter-spacing:2px;fill:#4b2d29}
+      .tag{font-size:16px;fill:#95685f}
+      .label{font-size:20px;font-weight:600;fill:#704840;letter-spacing:1px}
+      .cell{font-size:20px}
+      .small{font-size:17px;fill:#806c61}
+      .price{font-size:38px;font-weight:600;letter-spacing:1px;fill:#633c35}
+      .oldprice{font-size:18px;fill:#806c61}
+      .steps{font-size:21px}
+    </style>
+  </defs>
+  <rect width="1200" height="1370" rx="26" fill="url(#paper)"/>
+  <rect x="1" y="1" width="1198" height="1368" rx="25" fill="none" stroke="#d9c9b9" stroke-width="2"/>
+  <text x="70" y="83" class="eyebrow">SOUL COLOR · PERSON PALETTE</text>
+  <text x="70" y="154" class="title">三種方案怎麼選</text>
+  <text x="70" y="198" class="sub">看你想留下什麼，就選哪一種。</text>
+
+  <rect x="62" y="242" width="1076" height="756" rx="18" fill="#fffdf9" stroke="#dfd2c6" stroke-width="2"/>
+  <path d="M80 243h1040" stroke="url(#accent)" stroke-width="7" stroke-linecap="round"/>
+  <rect x="292" y="254" width="279" height="88" rx="9" fill="#f7e9e4"/>
+  <rect x="575" y="254" width="279" height="88" rx="9" fill="#f5efdf"/>
+  <rect x="858" y="254" width="268" height="88" rx="9" fill="#eaf0e9"/>
+  <rect x="292" y="254" width="279" height="4" rx="2" fill="#bb7b72"/>
+  <rect x="575" y="254" width="279" height="4" rx="2" fill="#c5a46f"/>
+  <rect x="858" y="254" width="268" height="4" rx="2" fill="#789889"/>
+  <path d="M290 260v720M573 260v720M856 260v720" stroke="#e8ddd2" stroke-width="2"/>
+  <path d="M80 350h1040M80 500h1040M80 680h1040M80 820h1040" stroke="#e8ddd2" stroke-width="2"/>
+
+  <text x="95" y="305" class="label">比較項目</text>
+  <text x="308" y="281" class="tag">01</text><text x="338" y="294" class="coltitle">色彩留影</text><text x="338" y="324" class="tag">一頁 A4 色彩整理</text>
+  <text x="591" y="281" class="tag">02</text><text x="621" y="294" class="coltitle">色彩人物卡</text><text x="621" y="324" class="tag">一張貼文分享</text>
+  <text x="874" y="281" class="tag">03</text><text x="904" y="294" class="coltitle">色彩人物誌</text><text x="904" y="324" class="tag">完整故事輪播</text>
+
+  <text x="95" y="410" class="label">適合你</text>
+  <text x="320" y="410" class="cell">你的金句及亮點</text>
+  <text x="603" y="410" class="cell">適合分享及自介</text>
+  <text x="886" y="410" class="cell">完整呈現你的人物故事</text>
+
+  <text x="95" y="568" class="label">作品內容</text>
+  <text x="320" y="555" class="cell"><tspan x="320">A4 色彩人物整理</tspan><tspan x="320" dy="33" class="small">電子檔 1 張</tspan></text>
+  <text x="603" y="545" class="cell"><tspan x="603">單張客製 IG 貼文</tspan><tspan x="603" dy="32">＋訪談內文</tspan></text>
+  <text x="886" y="545" class="cell"><tspan x="886">7–8 張客製輪播貼文</tspan><tspan x="886" dy="32">＋訪談內文</tspan></text>
+
+  <text x="95" y="758" class="label">訪談時間</text>
+  <text x="320" y="767" class="cell">約 40–60 分鐘</text>
+  <text x="603" y="767" class="cell">約 40–60 分鐘</text>
+  <text x="886" y="767" class="cell">約 60 分鐘</text>
+
+  <text x="95" y="900" class="label">限時優惠價</text>
+  <text x="320" y="900" class="price">NT$ 680</text><text x="320" y="937" class="oldprice">原價 NT$ 890</text>
+  <text x="603" y="900" class="price">NT$ 2,280</text><text x="603" y="937" class="oldprice">原價 NT$ 2,880</text>
+  <text x="886" y="900" class="price">NT$ 3,380</text><text x="886" y="937" class="oldprice">原價 NT$ 4,680</text>
+
+  <text x="70" y="1075" class="eyebrow">HOW IT WORKS</text>
+  <text x="70" y="1120" class="coltitle">服務流程</text>
+  <path d="M133 1194H1067" stroke="#cdb6a7" stroke-width="2"/>
+  <g fill="#f8f2e9" stroke="#a9796d" stroke-width="2">
+    <circle cx="150" cy="1194" r="24"/><circle cx="450" cy="1194" r="24"/><circle cx="750" cy="1194" r="24"/><circle cx="1050" cy="1194" r="24"/>
+  </g>
+  <g font-size="16" font-style="italic" fill="#95685f" text-anchor="middle"><text x="150" y="1200">01</text><text x="450" y="1200">02</text><text x="750" y="1200">03</text><text x="1050" y="1200">04</text></g>
+  <g text-anchor="middle" class="steps">
+    <text x="150" y="1245">完成預約</text><text x="450" y="1245">直覺選色</text><text x="750" y="1245">線上訪談</text><text x="1050" y="1245">電子檔交付</text>
+  </g>
+  <text x="70" y="1310" class="small">訪談後七天內交付電子檔</text>
+  <text x="1130" y="1310" text-anchor="end" class="small">色彩 × 訪談 × 故事</text>
+</svg>
