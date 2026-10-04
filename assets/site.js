@@ -312,7 +312,7 @@
 
   function initTitleReveal() {
     const pageTitles = [...document.querySelectorAll("main h1")];
-    const sectionTitles = [...document.querySelectorAll("main h2")].filter(title => !title.closest(".reveal, .process-reveal"));
+    const sectionTitles = [...document.querySelectorAll("main h2")];
     const titles = [...pageTitles, ...sectionTitles];
     if (!titles.length) return;
     titles.forEach(title => {
@@ -335,13 +335,15 @@
     sectionTitles.forEach(title => title.classList.add("title-reveal", "section-title-reveal"));
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced || !("IntersectionObserver" in window)) return titles.forEach(title => title.classList.add("is-title-visible"));
+    const independentlyRevealedTitles = titles.filter(title => !title.closest(".reveal, .process-reveal"));
+    if (!independentlyRevealedTitles.length) return;
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-title-visible");
         observer.unobserve(entry.target);
       }
     }), { threshold: 0.2, rootMargin: "0px 0px -6% 0px" });
-    requestAnimationFrame(() => requestAnimationFrame(() => titles.forEach(title => observer.observe(title))));
+    requestAnimationFrame(() => requestAnimationFrame(() => independentlyRevealedTitles.forEach(title => observer.observe(title))));
   }
 
   function initFaq() {

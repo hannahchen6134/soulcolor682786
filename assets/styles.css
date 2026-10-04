@@ -117,6 +117,8 @@ h3 { font-size: clamp(24px, 2vw, 32px); line-height: 1.42; }
 .title-reveal-line:nth-child(2) { transition-delay:.12s; }
 .title-reveal-line:nth-child(3) { transition-delay:.2s; }
 .title-reveal.is-title-visible .title-reveal-line { opacity:1; transform:none; }
+.reveal.is-visible .title-reveal-line,
+.process-reveal.is-visible .title-reveal-line { opacity:1; transform:none; }
 
 /* Homepage thesis */
 .home-hero { min-height: calc(100svh - 86px); padding: clamp(72px, 8vw, 116px) var(--gutter); position: relative; display: grid; grid-template-columns: minmax(340px,.85fr) minmax(440px,1.15fr); gap: 6vw; align-items: center; overflow: hidden; isolation: isolate; background: var(--paper); }
@@ -1271,6 +1273,8 @@ body[data-page="profile"] .site-footer::before { display: none; }
   .story-case-link { min-height:44px; margin-top:8px; padding-inline:16px; font-size:10.5px; }
   .service-case-links { width:100%; margin-top:8px; gap:5px; }
   .service-case-links .story-case-link { min-height:44px; padding-inline:7px; gap:3px; flex:0 1 auto; font-size:clamp(8.7px,2.4vw,10.5px); letter-spacing:.02em; }
+  .service-row--person-card .service-case-links { flex-wrap:wrap; }
+  .service-row--person-card .service-case-links .story-case-link { max-width:100%; padding-inline:6px; font-size:clamp(8px,2.2vw,9px); line-height:1.4; white-space:normal; }
   .service-row--color-memory .service-case-links .story-case-link { min-height:46px; padding-inline:16px; gap:8px; font-size:12px; letter-spacing:.05em; }
   .service-case-links .story-case-link span { font-size:10px; }
   .service-case-links .story-case-link--wide { font-size:clamp(8.4px,2.25vw,9.8px); }
