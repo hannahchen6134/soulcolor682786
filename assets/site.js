@@ -13,13 +13,13 @@
       @media (any-hover: hover) and (any-pointer: fine) {
         html, body, body * { cursor: none !important; }
         input, textarea, [contenteditable="true"], [contenteditable=""] { cursor: text !important; }
-        .soul-star-cursor { position: fixed; z-index: 10000; top: 0; left: 0; width: 16px; height: 16px; pointer-events: none; opacity: 0; color: #9b817b; transform: translate3d(-50%, -50%, 0) scale(.92); transition: opacity .22s ease, filter .25s ease, scale .25s ease; filter: drop-shadow(0 0 2px rgba(250, 222, 187, .82)) drop-shadow(0 0 5px rgba(164, 93, 72, .5)) drop-shadow(0 0 9px rgba(164, 93, 72, .24)); }
+        .soul-star-cursor { position: fixed; z-index: 10000; top: 0; left: 0; width: 16px; height: 16px; pointer-events: none; opacity: 0; color: #9b817b; transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0) translate(-50%, -50%) scale(.92); transition: opacity .22s ease, scale .25s ease; filter: drop-shadow(0 0 3px rgba(250, 222, 187, .78)) drop-shadow(0 0 7px rgba(164, 93, 72, .34)); }
         .soul-star-cursor.is-visible { opacity: .96; animation: soul-star-twinkle 3.2s ease-in-out infinite; }
-        .soul-star-cursor.is-action { filter: drop-shadow(0 0 2px rgba(250, 222, 187, .9)) drop-shadow(0 0 6px rgba(164, 93, 72, .62)) drop-shadow(0 0 10px rgba(164, 93, 72, .3)); scale: 1.06; }
+        .soul-star-cursor.is-action { scale: 1.06; }
         .soul-star-cursor svg { display: block; width: 100%; height: 100%; overflow: visible; }
-        @keyframes soul-star-twinkle { 0%, 100% { opacity: .82; transform: translate3d(-50%, -50%, 0) scale(.88) rotate(-2deg); } 50% { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(1) rotate(2deg); } }
+        @keyframes soul-star-twinkle { 0%, 100% { opacity: .82; transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0) translate(-50%, -50%) scale(.88) rotate(-2deg); } 50% { opacity: 1; transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0) translate(-50%, -50%) scale(1) rotate(2deg); } }
       }
-      @media (prefers-reduced-motion: reduce) { .soul-star-cursor.is-visible { animation: none; opacity: .86; transform: translate3d(-50%, -50%, 0) scale(.9); } }
+      @media (prefers-reduced-motion: reduce) { .soul-star-cursor.is-visible { animation: none; opacity: .86; transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0) translate(-50%, -50%) scale(.9); } }
     `;
     document.head.appendChild(style);
 
@@ -37,8 +37,8 @@
       y = event.clientY;
       if (frame) return;
       frame = requestAnimationFrame(() => {
-        cursor.style.left = `${x}px`;
-        cursor.style.top = `${y}px`;
+        cursor.style.setProperty("--cursor-x", `${x}px`);
+        cursor.style.setProperty("--cursor-y", `${y}px`);
         cursor.classList.add("is-visible");
         frame = 0;
       });
@@ -391,6 +391,11 @@
       let pixelRatio = 1;
       let start = performance.now();
       let frameId = 0;
+      const animationDuration = 4800;
+      const frameInterval = 1000 / 24;
+      let settled = false;
+      let settledAt = 0;
+      let lastRenderAt = 0;
 
       function resize() {
         const rect = field.getBoundingClientRect();
@@ -402,18 +407,30 @@
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
         context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        if (settled) draw(settledAt, true);
       }
 
-      function draw(now, finalState) {
+      function draw(now, forceFinal = false) {
         if (!width || !height) resize();
-        const elapsed = finalState ? 10000 : now - start;
+        const finalState = forceFinal || now - start >= animationDuration;
+        if (!forceFinal && !finalState && now - lastRenderAt < frameInterval) {
+          frameId = requestAnimationFrame(time => draw(time));
+          return;
+        }
+        lastRenderAt = now;
+        const renderTime = finalState ? start + animationDuration : now;
+        const elapsed = finalState ? animationDuration : now - start;
+        if (finalState) {
+          settled = true;
+          settledAt = renderTime;
+        }
         context.clearRect(0, 0, width, height);
         context.globalCompositeOperation = "source-over";
 
         activeColors.forEach((color, index) => {
           const arrival = finalState ? 1 : easeInOut(Math.min(1, Math.max(0, (elapsed - color.delay) / 2100)));
           if (arrival <= 0) return;
-          const phase = (now / 1000 / color.period) * Math.PI * 2 + index * .84 + fieldIndex * .45;
+          const phase = (renderTime / 1000 / color.period) * Math.PI * 2 + index * .84 + fieldIndex * .45;
           const x = width * (color.x + Math.sin(phase) * color.dx);
           const y = height * (color.y + Math.cos(phase * .86) * color.dy);
           const breathe = 1 + Math.sin(phase * .72) * .028;
@@ -432,7 +449,7 @@
 
         const allIn = finalState ? 1 : Math.min(1, Math.max(0, (elapsed - 2500) / 2100));
         if (allIn > 0) {
-          const breath = .5 + .5 * Math.sin(now * .00042 + fieldIndex);
+          const breath = .5 + .5 * Math.sin(renderTime * .00042 + fieldIndex);
           const warmGlow = context.createRadialGradient(width * .5, height * .45, 0, width * .5, height * .45, Math.min(width, height) * .56);
           warmGlow.addColorStop(0, `rgba(255,246,232,${(.035 + breath * .025) * allIn})`);
           warmGlow.addColorStop(1, "rgba(255,246,232,0)");
@@ -440,12 +457,12 @@
           context.fillRect(0, 0, width, height);
         }
 
-        if (!finalState) frameId = requestAnimationFrame(time => draw(time, false));
+        if (!finalState) frameId = requestAnimationFrame(time => draw(time));
       }
 
       resize();
       if (reduced) draw(performance.now(), true);
-      else frameId = requestAnimationFrame(time => draw(time, false));
+      else frameId = requestAnimationFrame(time => draw(time));
 
       if ("ResizeObserver" in window) {
         const resizeObserver = new ResizeObserver(() => resize());
@@ -457,9 +474,9 @@
       document.addEventListener("visibilitychange", () => {
         if (reduced) return;
         if (document.hidden) cancelAnimationFrame(frameId);
-        else {
-          start = performance.now() - 10000;
-          frameId = requestAnimationFrame(time => draw(time, false));
+        else if (!settled) {
+          start = performance.now() - animationDuration;
+          frameId = requestAnimationFrame(time => draw(time));
         }
       });
     });
